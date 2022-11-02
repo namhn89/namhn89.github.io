@@ -1,11 +1,11 @@
 // Favicon
 document.addEventListener("visibilitychange", function () {
   if (document.visibilityState === "visible") {
-    document.title = "Portfolio | Erastus HS";
-    $("#favicon").attr("href", "assets/img/foto/logo.png");
+    document.title = "Portfolio | Nam Nguyen";
+    $("#favicon").attr("href", "assets/img/foto/nam.png");
   } else {
     document.title = "Welcome to My Portfolio";
-    $("#favicon").attr("href", "assets/img/foto/favicon.png");
+    $("#favicon").attr("href", "assets/img/foto/nam.png");
   }
 });
 
