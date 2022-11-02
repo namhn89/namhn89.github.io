@@ -241,55 +241,59 @@ nav ul li a:hover {
 .home div.foto img:hover {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
-
-.home div.content {
-  position: relative;
-  width: 30%;
-  flex: 1 1 40rem;
-  padding-top: 1rem;
-  z-index: 1;
+.home div.test {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
-.home div.content h2 {
-  position: absolute;
+.home div.test h2 {
+  text-align: center;
   color: white;
   font-weight: 800;
-  font-size: 3rem;
-  margin-top: -20rem;
+  font-size: 2rem;
 }
-.home div.content p {
+.home div.test p {
   position: absolute;
   color: white;
   font-size: 1.5rem;
   margin-top: -12rem;
-  /* text-align: center; */
+  text-align: center;
 }
-.home div.content p span {
+.home div.new {
+    width: 400px;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+}
+
+.home div.new p span {
   color: #0077ff;
 }
-.home div.content a {
+
+.home div.new a {
   font-weight: 600;
-  position: absolute;
-  margin-top: -8rem;
-  position: absolute;
   line-height: 0;
   padding: 1.3rem 2.4rem;
   border-radius: 5em;
   transition: transform 0.3s, background 0.3s, color 0s;
   box-shadow: 0px 5px 18px rgba(32, 32, 32, 0.6);
 }
-.home div.content a span {
+
+.home div.new a span {
   font-size: 1rem;
 }
-.home div.content a.email {
+
+.home div.new a.email {
   color: black;
   background: white;
 }
-.home div.content a.cv {
+
+.home div.new a.cv {
   color: #fff;
   background: #4e4e4e;
-  margin-left: 9.5rem;
 }
-.home div.content a:hover {
+
+.home div.new a:hover {
   transform: scale(1.1);
   color: white;
   background: #0077ff;
@@ -360,7 +364,8 @@ nav ul li a:hover {
 
 /*?======================== About start =========================*/
 section.about {
-  min-height: auto;
+  /* min-height: auto; */
+  min-height: 60vh;
 }
 .about div.about-me {
   display: flex;
