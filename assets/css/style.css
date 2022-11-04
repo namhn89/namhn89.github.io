@@ -251,6 +251,7 @@ nav ul li a:hover {
   color: white;
   font-weight: 800;
   font-size: 2rem;
+  text-transform: none;
 }
 .home div.test p {
   position: absolute;
