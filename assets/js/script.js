@@ -4,7 +4,7 @@ document.addEventListener("visibilitychange", function () {
     document.title = "Portfolio | Nam Nguyen";
     $("#favicon").attr("href", "assets/img/foto/nam.png");
   } else {
-    document.title = "Welcome to My Portfolio";
+    document.title = "Portfolio | Nam Nguyen";
     $("#favicon").attr("href", "assets/img/foto/nam.png");
   }
 });
