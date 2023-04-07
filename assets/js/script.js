@@ -54,7 +54,6 @@ $('a[href*="#"]').on("click", function (e) {
   );
 });
 
-// typed js vanilla
 let dataTyping = {
   target: "typing-text",
   text: '["Hi, I\'m Nam Nguyen"]',
