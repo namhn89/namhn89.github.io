@@ -54,10 +54,9 @@ $('a[href*="#"]').on("click", function (e) {
   );
 });
 
-// typed js vanilla
 let dataTyping = {
   target: "typing-text",
-  text: '["frontend development", "web development"]',
+  text: '["Xin chào, mình là Nguyễn Hoài Nam", "Hi, I\'m Nam Hoai Nguyen", "大家好，我是软坏南"]',
   delay: "1000",
 };
 
