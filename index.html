@@ -69,6 +69,13 @@
     <!--?======================== Home start ========================= -->
     <section class="home" id="home">
         <!-- <div id="particles-js"></div> -->
+        <!-- audio file -->
+        <audio autoplay id="myVideo" autoloop muted>
+          <source src="./assets/audio/audio.mp3" type="audio/mp3">
+        </audio>
+        <div class="content">
+          <button id="myBtn" onclick="myFunction()"><i class="fas fa-volume-mute"></i></button>
+        </div>
         <div id="particles-js" style="position: fixed; width: 100%; height: 100%;"></div>
         <div class="test">
             <h2 >
@@ -339,6 +346,7 @@
 
     <!--?======================== Scroll Up ========================= -->
     <a href="#home" aria-label="ScrollTop" class="fas fa-arrow-up" id="scroll-top"></a>
+    <!-- <a class="fas fa-volume-off" id="play-music"></a> -->
     <!--?======================== Scroll Up ========================= -->
 
     <!--? jQuery CDN -->

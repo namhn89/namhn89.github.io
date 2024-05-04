@@ -10,6 +10,31 @@ document.addEventListener("visibilitychange", function () {
 });
 
 // script hamburger untuk mobile responsive
+
+var audio = document.getElementById("myVideo");
+var btn = document.getElementById("myBtn");
+
+//declare unmute icon variable
+var unmuteIcon = '<i class="fas fa-volume-up"></i>'
+
+//declare mute icon variable
+var muteIcon = '<i class="fas fa-volume-mute"></i>'
+
+function myFunction() {
+  // toggle the muted property of the video element
+  // if the video is muted, set the btn.innerHTML to unmuteIcon
+  // otherwise, set it to the muteIcon
+  if (audio.muted) {
+    audio.muted = false
+    audio.play()
+    btn.innerHTML = unmuteIcon;
+  } else {
+    audio.muted = true
+    btn.innerHTML = muteIcon;
+  }
+}
+
+
 const menuToggle = document.querySelector(".menu-toggle input");
 const nav = document.querySelector("nav ul");
 
