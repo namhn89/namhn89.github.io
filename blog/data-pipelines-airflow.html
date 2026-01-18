@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E2NHTRMLWG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-E2NHTRMLWG');
+    </script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keyword" content="Nam Nguyen, Data Engineering, Apache Airflow" />
+    <meta name="author" content="Nam Nguyen" />
+    <meta name="description" content="Building Scalable Data Pipelines with Apache Airflow" />
+    <title>Building Scalable Data Pipelines with Apache Airflow | Nam Nguyen</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link id="favicon" rel="shortcut icon" href="../assets/img/foto/nam.png" type="image/x-png" />
+
+    <style>
+      .blog-detail {
+        min-height: 100vh;
+        padding: 6rem 18%;
+        background-color: #202020;
+      }
+
+      .blog-detail .back-link {
+        color: #0077ff;
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: transform 0.3s;
+      }
+
+      .blog-detail .back-link:hover {
+        transform: translateX(-5px);
+      }
+
+      .blog-detail .post-header {
+        margin-bottom: 2rem;
+      }
+
+      .blog-detail .post-meta {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        color: #999;
+      }
+
+      .blog-detail .post-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .blog-detail .post-title {
+        color: white;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+        text-transform: none;
+      }
+
+      .blog-detail .post-excerpt {
+        color: #ccc;
+        font-size: 1.2rem;
+        line-height: 1.6;
+        text-transform: none;
+        margin-bottom: 2rem;
+      }
+
+      .blog-detail .post-image {
+        width: 100%;
+        height: 400px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+      }
+
+      .blog-detail .post-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .blog-detail .post-content {
+        color: #ddd;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        text-transform: none;
+      }
+
+      .blog-detail .post-content h2 {
+        color: white;
+        font-size: 1.8rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        text-transform: none;
+      }
+
+      .blog-detail .post-content h3 {
+        color: white;
+        font-size: 1.4rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
+        text-transform: none;
+      }
+
+      .blog-detail .post-content p {
+        margin-bottom: 1.5rem;
+        text-align: justify;
+      }
+
+      .blog-detail .post-content ul, .blog-detail .post-content ol {
+        margin-bottom: 1.5rem;
+        padding-left: 2rem;
+      }
+
+      .blog-detail .post-content li {
+        margin-bottom: 0.8rem;
+      }
+
+      .blog-detail .post-content code {
+        background: #2b2b2b;
+        padding: 0.2rem 0.5rem;
+        border-radius: 3px;
+        font-family: monospace;
+        color: #0077ff;
+      }
+
+      .blog-detail .post-content pre {
+        background: #2b2b2b;
+        padding: 1rem;
+        border-radius: 5px;
+        overflow-x: auto;
+        margin-bottom: 1.5rem;
+      }
+
+      .blog-detail .post-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid #444;
+      }
+
+      .blog-detail .post-tags .tag {
+        background: rgba(0, 119, 255, 0.2);
+        color: #0077ff;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+      }
+
+      @media screen and (max-width: 968px) {
+        .blog-detail {
+          padding: 6rem 5%;
+        }
+
+        .blog-detail .post-title {
+          font-size: 2rem;
+        }
+
+        .blog-detail .post-image {
+          height: 300px;
+        }
+      }
+
+      @media screen and (max-width: 568px) {
+        .blog-detail {
+          padding: 6rem 2%;
+        }
+
+        .blog-detail .post-title {
+          font-size: 1.5rem;
+        }
+
+        .blog-detail .post-image {
+          height: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <ul>
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#work">Work</a></li>
+        <li><a href="../index.html#project">Project</a></li>
+        <li><a class="active" href="../index.html#blog">Blog</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+
+      <div class="menu-toggle">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <section class="blog-detail">
+      <a href="/index.html#blog" class="back-link" onclick="window.location.href='/index.html#blog'">
+        <i class="fas fa-arrow-left"></i> Back to Blog
+      </a>
+
+      <article class="post-header">
+        <div class="post-meta">
+          <span><i class="fas fa-calendar"></i> December 15, 2025</span>
+          <span><i class="fas fa-clock"></i> 5 min read</span>
+          <span><i class="fas fa-tag"></i> Data Engineering</span>
+        </div>
+
+        <h1 class="post-title">Building Scalable Data Pipelines with Apache Airflow</h1>
+
+        <p class="post-excerpt">
+          Exploring best practices for designing and implementing robust data pipelines using Apache Airflow.
+          Learn about DAG optimization, error handling, and monitoring strategies for production environments.
+        </p>
+      </article>
+
+      <div class="post-image">
+        <img src="../assets/img/blog/airflow.png" alt="Data Engineering" />
+      </div>
+
+      <div class="post-content">
+        <h2>Introduction</h2>
+        <p>
+          Apache Airflow has become the de facto standard for orchestrating complex data pipelines. In my experience working with data engineering projects,
+          I've learned that building scalable pipelines requires more than just writing DAGs. It demands careful consideration of architecture, monitoring,
+          error handling, and optimization strategies.
+        </p>
+
+        <h2>Understanding Airflow Architecture</h2>
+        <p>
+          Before diving into best practices, it's crucial to understand Airflow's core components:
+        </p>
+        <ul>
+          <li><strong>Scheduler:</strong> Monitors DAGs and triggers task instances when dependencies are met</li>
+          <li><strong>Executor:</strong> Handles running task instances (LocalExecutor, CeleryExecutor, KubernetesExecutor)</li>
+          <li><strong>Web Server:</strong> Provides the UI for monitoring and managing workflows</li>
+          <li><strong>Metadata Database:</strong> Stores state of DAGs, tasks, and execution history</li>
+        </ul>
+
+        <h2>Best Practices for DAG Design</h2>
+
+        <h3>1. Keep DAGs Simple and Modular</h3>
+        <p>
+          Break down complex workflows into smaller, manageable tasks. Each task should have a single responsibility,
+          making debugging and maintenance much easier. Use task groups to organize related tasks visually.
+        </p>
+
+        <h3>2. Optimize DAG Parsing</h3>
+        <p>
+          The scheduler parses all DAG files frequently, which can impact performance. Key optimizations include:
+        </p>
+        <ul>
+          <li>Avoid expensive operations in the DAG file (database queries, API calls)</li>
+          <li>Use dynamic DAG generation sparingly</li>
+          <li>Keep the number of DAG files reasonable</li>
+          <li>Set appropriate <code>dagbag_import_timeout</code> values</li>
+        </ul>
+
+        <h3>3. Implement Proper Error Handling</h3>
+        <p>
+          Robust error handling is critical for production pipelines. I recommend:
+        </p>
+        <ul>
+          <li>Setting appropriate retry policies with exponential backoff</li>
+          <li>Using <code>on_failure_callback</code> for alerting</li>
+          <li>Implementing idempotent tasks that can safely retry</li>
+          <li>Adding comprehensive logging for troubleshooting</li>
+        </ul>
+
+        <h2>Monitoring and Observability</h2>
+        <p>
+          Effective monitoring is essential for maintaining healthy pipelines. Here's what I've found works well:
+        </p>
+        <ul>
+          <li><strong>SLA Monitoring:</strong> Set task-level SLAs to catch performance degradation</li>
+          <li><strong>Custom Metrics:</strong> Export metrics to Prometheus/Grafana for visualization</li>
+          <li><strong>Alerting:</strong> Configure Slack/email alerts for critical failures</li>
+          <li><strong>Logging:</strong> Centralize logs using ELK stack or CloudWatch</li>
+        </ul>
+
+        <h2>Scaling Considerations</h2>
+
+        <h3>Choosing the Right Executor</h3>
+        <p>
+          For production environments, I recommend:
+        </p>
+        <ul>
+          <li><strong>CeleryExecutor:</strong> Great for horizontal scaling with multiple workers</li>
+          <li><strong>KubernetesExecutor:</strong> Best for dynamic resource allocation and isolation</li>
+          <li>Avoid LocalExecutor in production (suitable only for development)</li>
+        </ul>
+
+        <h3>Resource Management</h3>
+        <p>
+          Implement pools and queues to manage resource consumption effectively. This prevents overwhelming downstream systems
+          and ensures fair resource allocation across different pipelines.
+        </p>
+
+        <h2>Testing Strategy</h2>
+        <p>
+          Testing DAGs is often overlooked but crucial for reliability:
+        </p>
+        <ul>
+          <li>Unit test individual operators and tasks</li>
+          <li>Integration tests for end-to-end workflows</li>
+          <li>Use Airflow's test mode to validate DAGs</li>
+          <li>Implement CI/CD pipelines for automated testing</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>
+          Building scalable data pipelines with Airflow requires thoughtful architecture, proper monitoring, and adherence to best practices.
+          By following these guidelines, you can create robust, maintainable pipelines that scale with your data needs. Remember that
+          optimization is an iterative process—continuously monitor, measure, and improve your pipelines based on real-world performance.
+        </p>
+
+        <div class="post-tags">
+          <span class="tag">Airflow</span>
+          <span class="tag">ETL</span>
+          <span class="tag">Python</span>
+          <span class="tag">Data Engineering</span>
+          <span class="tag">Scalability</span>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="../assets/js/script.js"></script>
+  </body>
+</html>

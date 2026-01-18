@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E2NHTRMLWG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-E2NHTRMLWG');
+    </script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keyword" content="Nam Nguyen, Machine Learning, LLM, Gemini" />
+    <meta name="author" content="Nam Nguyen" />
+    <meta name="description" content="Large Language Models in Production: Lessons Learned" />
+    <title>Large Language Models in Production: Lessons Learned | Nam Nguyen</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link id="favicon" rel="shortcut icon" href="../assets/img/foto/nam.png" type="image/x-png" />
+
+    <style>
+      .blog-detail {
+        min-height: 100vh;
+        padding: 6rem 18%;
+        background-color: #202020;
+      }
+
+      .blog-detail .back-link {
+        color: #0077ff;
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: transform 0.3s;
+      }
+
+      .blog-detail .back-link:hover {
+        transform: translateX(-5px);
+      }
+
+      .blog-detail .post-header {
+        margin-bottom: 2rem;
+      }
+
+      .blog-detail .post-meta {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        color: #999;
+      }
+
+      .blog-detail .post-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .blog-detail .post-title {
+        color: white;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+        text-transform: none;
+      }
+
+      .blog-detail .post-excerpt {
+        color: #ccc;
+        font-size: 1.2rem;
+        line-height: 1.6;
+        text-transform: none;
+        margin-bottom: 2rem;
+      }
+
+      .blog-detail .post-image {
+        width: 100%;
+        height: 400px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+      }
+
+      .blog-detail .post-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .blog-detail .post-content {
+        color: #ddd;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        text-transform: none;
+      }
+
+      .blog-detail .post-content h2 {
+        color: white;
+        font-size: 1.8rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        text-transform: none;
+      }
+
+      .blog-detail .post-content h3 {
+        color: white;
+        font-size: 1.4rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
+        text-transform: none;
+      }
+
+      .blog-detail .post-content p {
+        margin-bottom: 1.5rem;
+        text-align: justify;
+      }
+
+      .blog-detail .post-content ul, .blog-detail .post-content ol {
+        margin-bottom: 1.5rem;
+        padding-left: 2rem;
+      }
+
+      .blog-detail .post-content li {
+        margin-bottom: 0.8rem;
+      }
+
+      .blog-detail .post-content code {
+        background: #2b2b2b;
+        padding: 0.2rem 0.5rem;
+        border-radius: 3px;
+        font-family: monospace;
+        color: #0077ff;
+      }
+
+      .blog-detail .post-content pre {
+        background: #2b2b2b;
+        padding: 1rem;
+        border-radius: 5px;
+        overflow-x: auto;
+        margin-bottom: 1.5rem;
+      }
+
+      .blog-detail .post-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid #444;
+      }
+
+      .blog-detail .post-tags .tag {
+        background: rgba(0, 119, 255, 0.2);
+        color: #0077ff;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+      }
+
+      @media screen and (max-width: 968px) {
+        .blog-detail {
+          padding: 6rem 5%;
+        }
+
+        .blog-detail .post-title {
+          font-size: 2rem;
+        }
+
+        .blog-detail .post-image {
+          height: 300px;
+        }
+      }
+
+      @media screen and (max-width: 568px) {
+        .blog-detail {
+          padding: 6rem 2%;
+        }
+
+        .blog-detail .post-title {
+          font-size: 1.5rem;
+        }
+
+        .blog-detail .post-image {
+          height: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <ul>
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#work">Work</a></li>
+        <li><a href="../index.html#project">Project</a></li>
+        <li><a class="active" href="../index.html#blog">Blog</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+
+      <div class="menu-toggle">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <section class="blog-detail">
+      <a href="/index.html#blog" class="back-link" onclick="window.location.href='/index.html#blog'">
+        <i class="fas fa-arrow-left"></i> Back to Blog
+      </a>
+
+      <article class="post-header">
+        <div class="post-meta">
+          <span><i class="fas fa-calendar"></i> December 08, 2025</span>
+          <span><i class="fas fa-clock"></i> 8 min read</span>
+          <span><i class="fas fa-tag"></i> Machine Learning</span>
+        </div>
+
+        <h1 class="post-title">Large Language Models in Production: Lessons Learned</h1>
+
+        <p class="post-excerpt">
+          Sharing experiences from deploying a QnA bot powered by Gemini LLM. Topics include prompt engineering,
+          context management, cost optimization, and handling production challenges at scale.
+        </p>
+      </article>
+
+      <div class="post-image">
+        <img src="../assets/img/blog/llm.png" alt="Machine Learning" />
+      </div>
+
+      <div class="post-content">
+        <h2>Introduction</h2>
+        <p>
+          At SETA International Vietnam, I built a QnA bot leveraging Google's Gemini LLM to help engineers search through 100,000+ documents
+          across Confluence, Jira, and Zendesk. This experience taught me valuable lessons about deploying and maintaining LLMs in production
+          environments. Here's what I learned along the way.
+        </p>
+
+        <h2>The Challenge</h2>
+        <p>
+          Engineers were spending hours searching for documentation across multiple platforms. We needed a solution that could:
+        </p>
+        <ul>
+          <li>Understand natural language queries</li>
+          <li>Search across diverse data sources</li>
+          <li>Provide accurate, contextual answers</li>
+          <li>Scale to handle hundreds of concurrent users</li>
+          <li>Stay within reasonable cost constraints</li>
+        </ul>
+
+        <h2>Architecture Design</h2>
+
+        <h3>Data Ingestion Pipeline</h3>
+        <p>
+          The first step was building a robust data pipeline to ingest documents from various sources:
+        </p>
+        <ul>
+          <li><strong>Webhooks:</strong> Real-time updates for new/modified documents</li>
+          <li><strong>Batch Processing:</strong> Scheduled full syncs to catch any missed updates</li>
+          <li><strong>Data Transformation:</strong> Standardizing formats across different source systems</li>
+          <li><strong>Vector Embeddings:</strong> Converting documents into searchable vector representations</li>
+        </ul>
+
+        <h3>Retrieval-Augmented Generation (RAG)</h3>
+        <p>
+          We implemented a RAG architecture to enhance the LLM's responses with relevant context:
+        </p>
+        <ul>
+          <li>User query is converted to vector embeddings</li>
+          <li>Semantic search finds the most relevant documents</li>
+          <li>Retrieved documents are included in the LLM prompt</li>
+          <li>LLM generates answer based on provided context</li>
+        </ul>
+
+        <h2>Prompt Engineering</h2>
+        <p>
+          Effective prompt engineering was crucial for getting accurate, helpful responses. Key strategies:
+        </p>
+
+        <h3>System Prompts</h3>
+        <p>
+          We defined clear system prompts that instructed the model to:
+        </p>
+        <ul>
+          <li>Only answer based on provided context</li>
+          <li>Cite sources for all information</li>
+          <li>Admit when it doesn't know the answer</li>
+          <li>Maintain a helpful, professional tone</li>
+        </ul>
+
+        <h3>Few-Shot Learning</h3>
+        <p>
+          Including examples of good question-answer pairs in the prompt significantly improved response quality,
+          especially for domain-specific queries.
+        </p>
+
+        <h2>Context Management</h2>
+        <p>
+          Managing context windows effectively was one of the biggest challenges:
+        </p>
+
+        <h3>Chunking Strategy</h3>
+        <ul>
+          <li>Split documents into semantic chunks (paragraphs, sections)</li>
+          <li>Maintain overlap between chunks to preserve context</li>
+          <li>Store metadata (source, title, date) with each chunk</li>
+        </ul>
+
+        <h3>Context Ranking</h3>
+        <p>
+          Not all retrieved documents are equally relevant. We implemented a ranking system that considers:
+        </p>
+        <ul>
+          <li>Semantic similarity score</li>
+          <li>Document recency</li>
+          <li>Source reliability</li>
+          <li>User feedback (thumbs up/down)</li>
+        </ul>
+
+        <h2>Cost Optimization</h2>
+        <p>
+          LLM API calls can get expensive quickly. Here's how we managed costs:
+        </p>
+
+        <h3>Caching Strategy</h3>
+        <ul>
+          <li>Cache responses for identical queries</li>
+          <li>Implement semantic caching for similar queries</li>
+          <li>Cache embeddings for frequent documents</li>
+        </ul>
+
+        <h3>Smart Token Management</h3>
+        <ul>
+          <li>Truncate retrieved context to fit within limits</li>
+          <li>Prioritize most relevant chunks</li>
+          <li>Use summarization for very long documents</li>
+        </ul>
+
+        <h3>Model Selection</h3>
+        <p>
+          We used different models for different tasks:
+        </p>
+        <ul>
+          <li><strong>Gemini Pro:</strong> Main QnA responses</li>
+          <li><strong>Smaller models:</strong> Query classification and routing</li>
+          <li><strong>Embeddings API:</strong> Vector generation</li>
+        </ul>
+
+        <h2>Production Challenges</h2>
+
+        <h3>Latency Management</h3>
+        <p>
+          Initial response times were too slow. Solutions:
+        </p>
+        <ul>
+          <li>Parallel vector search and embedding generation</li>
+          <li>Streaming responses for better perceived performance</li>
+          <li>Pre-computing embeddings for frequently accessed documents</li>
+        </ul>
+
+        <h3>Error Handling</h3>
+        <p>
+          LLM APIs can fail in various ways. Robust error handling includes:
+        </p>
+        <ul>
+          <li>Retry logic with exponential backoff</li>
+          <li>Fallback to cached responses when available</li>
+          <li>Clear error messages for users</li>
+          <li>Comprehensive logging for debugging</li>
+        </ul>
+
+        <h3>Monitoring and Observability</h3>
+        <p>
+          We implemented detailed monitoring to track:
+        </p>
+        <ul>
+          <li>Response quality (user feedback)</li>
+          <li>Latency metrics</li>
+          <li>API costs per query</li>
+          <li>Error rates</li>
+          <li>Most common queries</li>
+        </ul>
+
+        <h2>Results and Impact</h2>
+        <p>
+          After deployment, we saw significant improvements:
+        </p>
+        <ul>
+          <li>80% reduction in time spent searching for documentation</li>
+          <li>Positive feedback from 85% of users</li>
+          <li>Average response time under 3 seconds</li>
+          <li>API costs within budget constraints</li>
+        </ul>
+
+        <h2>Key Takeaways</h2>
+        <ul>
+          <li><strong>Context is King:</strong> The quality of retrieved context directly impacts response quality</li>
+          <li><strong>Iterate on Prompts:</strong> Prompt engineering is an iterative process based on real user feedback</li>
+          <li><strong>Monitor Everything:</strong> Comprehensive monitoring is essential for identifying and fixing issues</li>
+          <li><strong>Manage Costs:</strong> Implement caching and smart context management from day one</li>
+          <li><strong>User Feedback Loop:</strong> Continuous improvement requires gathering and acting on user feedback</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>
+          Deploying LLMs in production is challenging but rewarding. The key is to focus on the fundamentals: good data quality,
+          effective prompt engineering, robust error handling, and continuous monitoring. With these in place, LLMs can provide
+          tremendous value to users and organizations.
+        </p>
+
+        <div class="post-tags">
+          <span class="tag">LLM</span>
+          <span class="tag">Gemini</span>
+          <span class="tag">GCP</span>
+          <span class="tag">RAG</span>
+          <span class="tag">NLP</span>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="../assets/js/script.js"></script>
+  </body>
+</html>

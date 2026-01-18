@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E2NHTRMLWG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-E2NHTRMLWG');
+    </script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keyword" content="Nam Nguyen, Kafka, Spark, Streaming" />
+    <meta name="author" content="Nam Nguyen" />
+    <meta name="description" content="Real-time Data Processing with Apache Kafka and Spark Streaming" />
+    <title>Real-time Data Processing with Apache Kafka and Spark Streaming | Nam Nguyen</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link id="favicon" rel="shortcut icon" href="../assets/img/foto/nam.png" type="image/x-png" />
+
+    <style>
+      .blog-detail {
+        min-height: 100vh;
+        padding: 6rem 18%;
+        background-color: #202020;
+      }
+
+      .blog-detail .back-link {
+        color: #0077ff;
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: transform 0.3s;
+      }
+
+      .blog-detail .back-link:hover {
+        transform: translateX(-5px);
+      }
+
+      .blog-detail .post-header {
+        margin-bottom: 2rem;
+      }
+
+      .blog-detail .post-meta {
+        display: flex;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        color: #999;
+      }
+
+      .blog-detail .post-meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .blog-detail .post-title {
+        color: white;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.3;
+        text-transform: none;
+      }
+
+      .blog-detail .post-excerpt {
+        color: #ccc;
+        font-size: 1.2rem;
+        line-height: 1.6;
+        text-transform: none;
+        margin-bottom: 2rem;
+      }
+
+      .blog-detail .post-image {
+        width: 100%;
+        height: 400px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+      }
+
+      .blog-detail .post-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .blog-detail .post-content {
+        color: #ddd;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        text-transform: none;
+      }
+
+      .blog-detail .post-content h2 {
+        color: white;
+        font-size: 1.8rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        text-transform: none;
+      }
+
+      .blog-detail .post-content h3 {
+        color: white;
+        font-size: 1.4rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
+        text-transform: none;
+      }
+
+      .blog-detail .post-content p {
+        margin-bottom: 1.5rem;
+        text-align: justify;
+      }
+
+      .blog-detail .post-content ul, .blog-detail .post-content ol {
+        margin-bottom: 1.5rem;
+        padding-left: 2rem;
+      }
+
+      .blog-detail .post-content li {
+        margin-bottom: 0.8rem;
+      }
+
+      .blog-detail .post-content code {
+        background: #2b2b2b;
+        padding: 0.2rem 0.5rem;
+        border-radius: 3px;
+        font-family: monospace;
+        color: #0077ff;
+      }
+
+      .blog-detail .post-content pre {
+        background: #2b2b2b;
+        padding: 1rem;
+        border-radius: 5px;
+        overflow-x: auto;
+        margin-bottom: 1.5rem;
+      }
+
+      .blog-detail .post-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid #444;
+      }
+
+      .blog-detail .post-tags .tag {
+        background: rgba(0, 119, 255, 0.2);
+        color: #0077ff;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+      }
+
+      @media screen and (max-width: 968px) {
+        .blog-detail {
+          padding: 6rem 5%;
+        }
+
+        .blog-detail .post-title {
+          font-size: 2rem;
+        }
+
+        .blog-detail .post-image {
+          height: 300px;
+        }
+      }
+
+      @media screen and (max-width: 568px) {
+        .blog-detail {
+          padding: 6rem 2%;
+        }
+
+        .blog-detail .post-title {
+          font-size: 1.5rem;
+        }
+
+        .blog-detail .post-image {
+          height: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <ul>
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#work">Work</a></li>
+        <li><a href="../index.html#project">Project</a></li>
+        <li><a class="active" href="../index.html#blog">Blog</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+
+      <div class="menu-toggle">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <section class="blog-detail">
+      <a href="/index.html#blog" class="back-link" onclick="window.location.href='/index.html#blog'">
+        <i class="fas fa-arrow-left"></i> Back to Blog
+      </a>
+
+      <article class="post-header">
+        <div class="post-meta">
+          <span><i class="fas fa-calendar"></i> November 24, 2025</span>
+          <span><i class="fas fa-clock"></i> 7 min read</span>
+          <span><i class="fas fa-tag"></i> Software Engineering</span>
+        </div>
+
+        <h1 class="post-title">Real-time Data Processing with Apache Kafka and Spark Streaming</h1>
+
+        <p class="post-excerpt">
+          Building a real-time analytics platform using Kafka for message streaming and Spark for processing.
+          Learn about exactly-once semantics, backpressure handling, and maintaining low latency at scale.
+        </p>
+      </article>
+
+      <div class="post-image">
+        <img src="../assets/img/blog/kafka_spark.png" alt="Software Engineering" />
+      </div>
+
+      <div class="post-content">
+        <h2>Introduction</h2>
+        <p>
+          Real-time data processing has become essential for modern applications. Whether it's fraud detection, user behavior analytics,
+          or IoT monitoring, the ability to process data as it arrives is critical. In this post, I'll share our experience building
+          a real-time analytics platform using Apache Kafka and Spark Streaming.
+        </p>
+
+        <h2>Architecture Overview</h2>
+        <p>
+          Our architecture consists of several key components:
+        </p>
+        <ul>
+          <li><strong>Data Sources:</strong> Multiple applications publishing events to Kafka</li>
+          <li><strong>Kafka Cluster:</strong> Message broker handling event streaming</li>
+          <li><strong>Spark Streaming:</strong> Real-time processing engine</li>
+          <li><strong>Data Sinks:</strong> Databases, data lakes, and dashboards</li>
+        </ul>
+
+        <h2>Why Kafka?</h2>
+        <p>
+          Apache Kafka excels at high-throughput message streaming:
+        </p>
+        <ul>
+          <li><strong>Scalability:</strong> Handles millions of messages per second</li>
+          <li><strong>Durability:</strong> Persistent message storage with replication</li>
+          <li><strong>Fault Tolerance:</strong> Built-in replication and failover</li>
+          <li><strong>Decoupling:</strong> Producers and consumers are independent</li>
+        </ul>
+
+        <h2>Kafka Best Practices</h2>
+
+        <h3>Topic Design</h3>
+        <p>
+          Proper topic organization is crucial:
+        </p>
+        <ul>
+          <li>Use clear naming conventions (e.g., <code>domain.entity.action</code>)</li>
+          <li>Configure appropriate partition counts based on throughput needs</li>
+          <li>Set retention policies based on use case</li>
+          <li>Use compacted topics for stateful data</li>
+        </ul>
+
+        <h3>Producer Configuration</h3>
+        <ul>
+          <li><code>acks=all</code>: Wait for all replicas to acknowledge</li>
+          <li><code>compression.type=snappy</code>: Reduce network bandwidth</li>
+          <li><code>enable.idempotence=true</code>: Prevent duplicates</li>
+          <li>Batch messages for better throughput</li>
+        </ul>
+
+        <h3>Consumer Groups</h3>
+        <p>
+          Leverage consumer groups for parallel processing:
+        </p>
+        <ul>
+          <li>Partitions are distributed among group members</li>
+          <li>Scale by adding more consumers (up to partition count)</li>
+          <li>Handle rebalancing gracefully</li>
+          <li>Monitor consumer lag closely</li>
+        </ul>
+
+        <h2>Spark Streaming Deep Dive</h2>
+
+        <h3>Structured Streaming</h3>
+        <p>
+          We use Spark's Structured Streaming API for its advantages:
+        </p>
+        <ul>
+          <li>Unified batch and streaming code</li>
+          <li>Built-in support for event time processing</li>
+          <li>Exactly-once semantics</li>
+          <li>Integration with Spark SQL and DataFrames</li>
+        </ul>
+
+        <h3>Processing Models</h3>
+
+        <h3>Micro-Batch Processing</h3>
+        <p>
+          Default mode in Structured Streaming:
+        </p>
+        <ul>
+          <li>Processes data in small batches (seconds)</li>
+          <li>Lower resource overhead</li>
+          <li>Good for most use cases</li>
+          <li>Latency in the order of seconds</li>
+        </ul>
+
+        <h3>Continuous Processing</h3>
+        <p>
+          For ultra-low latency requirements:
+        </p>
+        <ul>
+          <li>Processes events continuously</li>
+          <li>Millisecond latencies</li>
+          <li>Higher resource usage</li>
+          <li>Limited operation support</li>
+        </ul>
+
+        <h2>Exactly-Once Semantics</h2>
+        <p>
+          Achieving exactly-once processing is critical but challenging. Our approach:
+        </p>
+
+        <h3>Idempotent Writes</h3>
+        <ul>
+          <li>Enable idempotent producer in Kafka</li>
+          <li>Use transactional writes for multi-sink scenarios</li>
+          <li>Implement idempotent operations in processing logic</li>
+        </ul>
+
+        <h3>Checkpointing</h3>
+        <ul>
+          <li>Enable checkpointing to HDFS/S3</li>
+          <li>Spark tracks offset commits automatically</li>
+          <li>Ensures recovery to exact position after failures</li>
+          <li>Monitor checkpoint size and clean old checkpoints</li>
+        </ul>
+
+        <h2>Handling Backpressure</h2>
+        <p>
+          When processing can't keep up with incoming data:
+        </p>
+
+        <h3>Spark-Side Solutions</h3>
+        <ul>
+          <li><code>maxOffsetsPerTrigger</code>: Limit records per batch</li>
+          <li><code>minOffsetPerTrigger</code>: Ensure minimum batch size</li>
+          <li>Scale cluster resources (add executors)</li>
+          <li>Optimize processing logic</li>
+        </ul>
+
+        <h3>Kafka-Side Solutions</h3>
+        <ul>
+          <li>Increase partition count for better parallelism</li>
+          <li>Add more consumer instances</li>
+          <li>Implement rate limiting at producers</li>
+          <li>Use separate topics for different priorities</li>
+        </ul>
+
+        <h2>State Management</h2>
+
+        <h3>Stateful Operations</h3>
+        <p>
+          Many use cases require maintaining state:
+        </p>
+        <ul>
+          <li><strong>Aggregations:</strong> Running counts, sums, averages</li>
+          <li><strong>Windows:</strong> Tumbling, sliding, or session windows</li>
+          <li><strong>Joins:</strong> Stream-to-stream or stream-to-static joins</li>
+        </ul>
+
+        <h3>State Store Optimization</h3>
+        <ul>
+          <li>Use RocksDB for large state (instead of in-memory)</li>
+          <li>Configure state TTL to prevent unbounded growth</li>
+          <li>Use watermarks for event-time processing</li>
+          <li>Monitor state store size and performance</li>
+        </ul>
+
+        <h2>Monitoring and Observability</h2>
+
+        <h3>Key Metrics to Monitor</h3>
+
+        <h3>Kafka Metrics</h3>
+        <ul>
+          <li>Consumer lag per partition</li>
+          <li>Message throughput (messages/sec)</li>
+          <li>Broker CPU and disk usage</li>
+          <li>Under-replicated partitions</li>
+        </ul>
+
+        <h3>Spark Streaming Metrics</h3>
+        <ul>
+          <li>Processing time per batch</li>
+          <li>Scheduling delay</li>
+          <li>Number of active queries</li>
+          <li>Executor memory usage</li>
+        </ul>
+
+        <h3>Alerting Strategy</h3>
+        <ul>
+          <li>Alert on consumer lag exceeding thresholds</li>
+          <li>Monitor processing delays</li>
+          <li>Track failure rates</li>
+          <li>Set up dead letter queues for failed messages</li>
+        </ul>
+
+        <h2>Performance Optimization</h2>
+
+        <h3>Spark Tuning</h3>
+        <ul>
+          <li><strong>Parallelism:</strong> Match or exceed Kafka partition count</li>
+          <li><strong>Memory:</strong> Allocate sufficient executor memory</li>
+          <li><strong>Caching:</strong> Cache frequently accessed reference data</li>
+          <li><strong>Shuffle:</strong> Minimize shuffles in processing logic</li>
+        </ul>
+
+        <h3>Kafka Tuning</h3>
+        <ul>
+          <li>Increase <code>num.network.threads</code> for high throughput</li>
+          <li>Tune <code>replica.fetch.max.bytes</code> for replication</li>
+          <li>Use appropriate compression codec</li>
+          <li>Configure <code>log.segment.bytes</code> based on retention</li>
+        </ul>
+
+        <h2>Testing Strategy</h2>
+
+        <h3>Unit Testing</h3>
+        <ul>
+          <li>Test processing logic with static data</li>
+          <li>Use Spark's built-in testing utilities</li>
+          <li>Mock external dependencies</li>
+        </ul>
+
+        <h3>Integration Testing</h3>
+        <ul>
+          <li>Use embedded Kafka for tests</li>
+          <li>Test end-to-end with representative data</li>
+          <li>Verify exactly-once semantics</li>
+          <li>Test failure recovery scenarios</li>
+        </ul>
+
+        <h2>Production Lessons</h2>
+
+        <h3>What Worked Well</h3>
+        <ul>
+          <li>Structured Streaming's exactly-once guarantees</li>
+          <li>Kafka's reliability and scalability</li>
+          <li>Watermarks for handling late data</li>
+          <li>Comprehensive monitoring setup</li>
+        </ul>
+
+        <h3>Challenges Faced</h3>
+        <ul>
+          <li>State store size management with long windows</li>
+          <li>Handling schema evolution in streaming data</li>
+          <li>Balancing latency vs. throughput</li>
+          <li>Coordinating upgrades without downtime</li>
+        </ul>
+
+        <h2>Results and Impact</h2>
+        <ul>
+          <li>Processing 10M+ events per minute</li>
+          <li>Average end-to-end latency under 2 seconds</li>
+          <li>99.99% exactly-once delivery</li>
+          <li>Zero data loss during failures</li>
+          <li>Enabled real-time business decisions</li>
+        </ul>
+
+        <h2>Conclusion</h2>
+        <p>
+          Building a real-time streaming platform with Kafka and Spark requires careful consideration of architecture,
+          performance, and reliability. By following best practices for both technologies, implementing proper monitoring,
+          and learning from production experience, you can build a robust system that processes data at scale with
+          low latency and high reliability.
+        </p>
+
+        <div class="post-tags">
+          <span class="tag">Kafka</span>
+          <span class="tag">Spark</span>
+          <span class="tag">Streaming</span>
+          <span class="tag">Real-time</span>
+          <span class="tag">Scala</span>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="../assets/js/script.js"></script>
+  </body>
+</html>
