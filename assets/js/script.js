@@ -160,3 +160,23 @@ window.addEventListener("load", function () {
     body.classList.remove("hidden");
   }, preloadDelay);
 });
+
+// Theme toggle
+const themeToggle = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
+const htmlEl = document.documentElement;
+
+function applyThemeIcon(theme) {
+  themeIcon.className = theme === "dark" ? "fas fa-sun" : "fas fa-moon";
+}
+
+// Sync icon with whatever theme was applied by the inline script
+applyThemeIcon(htmlEl.getAttribute("data-theme") || "dark");
+
+themeToggle.addEventListener("click", function () {
+  const current = htmlEl.getAttribute("data-theme");
+  const next = current === "dark" ? "light" : "dark";
+  htmlEl.setAttribute("data-theme", next);
+  localStorage.setItem("portfolio-theme", next);
+  applyThemeIcon(next);
+});

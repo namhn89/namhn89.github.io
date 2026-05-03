@@ -11,6 +11,14 @@
 
     gtag('config', 'G-E2NHTRMLWG');
   </script>
+  <!-- Apply saved theme before render to prevent flash -->
+  <script>
+    (function() {
+      var saved = localStorage.getItem('portfolio-theme');
+      var sys = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', saved || sys);
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -64,6 +72,10 @@
       <li><a href="#blog">Blog</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
+      <i class="fas fa-moon" id="theme-icon"></i>
+    </button>
 
     <div class="menu-toggle">
       <input type="checkbox" />

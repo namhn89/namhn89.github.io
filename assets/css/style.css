@@ -11,6 +11,76 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+/* ===============================================
+   CSS Custom Properties — Dark (default) / Light
+   =============================================== */
+:root {
+  --bg-primary: #202020;
+  --bg-secondary: #2b2b2b;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-muted: #999999;
+  --accent: #0077ff;
+  --accent-hover: #0066dd;
+  --timeline-line: rgba(211, 207, 205, 1);
+  --nav-link-color: aliceblue;
+  --card-bg: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] {
+  --bg-primary: #eef1f7;
+  --bg-secondary: #ffffff;
+  --text-primary: #1a1a2e;
+  --text-secondary: #555567;
+  --text-muted: #8888a0;
+  --accent: #0077ff;
+  --accent-hover: #0055dd;
+  --timeline-line: rgba(160, 160, 180, 1);
+  --nav-link-color: #1a1a2e;
+  --card-bg: rgba(0, 0, 0, 0.04);
+}
+
+/* ===============================================
+   Theme Toggle Button
+   =============================================== */
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  color: #c8d0e8;
+  font-size: 1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.theme-toggle:hover {
+  background: rgba(0, 119, 255, 0.18);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: rotate(20deg) scale(1.05);
+}
+[data-theme="light"] .theme-toggle {
+  background: rgba(26, 26, 46, 0.06);
+  border-color: rgba(26, 26, 46, 0.15);
+  color: #1a1a2e;
+}
+[data-theme="light"] .theme-toggle:hover {
+  background: rgba(0, 119, 255, 0.1);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+@media screen and (max-width: 968px) {
+  .theme-toggle {
+    margin-top: 12px;
+  }
+}
+
 body {
   font-family: "Outfit", sans-serif;
   overflow-x: hidden;
@@ -2152,4 +2222,251 @@ section.blog {
     top: 86%;
     right: 90%;
   }
+}
+
+/* ===============================================
+   Light Theme Overrides
+   =============================================== */
+
+/* Sections */
+[data-theme="light"] section:nth-child(odd) {
+  background-color: #ffffff;
+}
+[data-theme="light"] section:nth-child(even) {
+  background-color: #eef1f7;
+}
+/* Home always stays dark — particles look best on dark */
+[data-theme="light"] section.home {
+  background-color: #1a1a2e;
+}
+
+/* Headings */
+[data-theme="light"] .heading {
+  color: #1a1a2e;
+}
+
+/* Scrollbar */
+[data-theme="light"] html::-webkit-scrollbar-track {
+  background: #e4e8f0;
+}
+[data-theme="light"] html::-webkit-scrollbar-thumb {
+  background: rgba(0, 119, 255, 0.35);
+}
+[data-theme="light"] html::-webkit-scrollbar-thumb:hover {
+  background: #0077ff;
+}
+
+/* Preloader */
+[data-theme="light"] .preloader {
+  background-color: #eef1f7;
+}
+
+/* Navbar */
+[data-theme="light"] nav {
+  background-color: #ffffff;
+  box-shadow: 0 1px 12px rgba(26, 26, 46, 0.1);
+}
+[data-theme="light"] nav ul li a {
+  color: #1a1a2e;
+}
+[data-theme="light"] nav ul li a.active,
+[data-theme="light"] nav ul li a:hover {
+  color: #0077ff;
+  border-bottom-color: #0077ff;
+}
+[data-theme="light"] nav ul {
+  background-color: #ffffff;
+}
+[data-theme="light"] .menu-toggle span {
+  background-color: #1a1a2e;
+}
+
+/* About */
+[data-theme="light"] .about div.about-me div.about-desc p {
+  color: #333344;
+}
+[data-theme="light"] .about div.about-me div.about-desc a {
+  color: #ffffff;
+  background-color: #1a1a2e;
+}
+[data-theme="light"] .about div.about-me div.about-desc a:hover {
+  background: #0077ff;
+  color: #ffffff;
+}
+
+/* Education */
+[data-theme="light"] .education .education-item {
+  background: rgba(26, 26, 46, 0.04);
+}
+[data-theme="light"] .education .degree {
+  color: #1a1a2e;
+}
+[data-theme="light"] .education .description {
+  color: #555567;
+}
+[data-theme="light"] .education .achievements h5,
+[data-theme="light"] .education .coursework h5 {
+  color: #1a1a2e;
+}
+[data-theme="light"] .education .course-tag {
+  background: rgba(26, 26, 46, 0.06);
+  color: #1a1a2e;
+}
+[data-theme="light"] .education .course-tag:hover {
+  background: rgba(0, 119, 255, 0.1);
+}
+
+/* Work / Timeline */
+[data-theme="light"] .main-timeline:before {
+  background: rgba(160, 160, 180, 1);
+}
+[data-theme="light"] .main-timeline .timeline-content:before {
+  background: rgba(160, 160, 180, 1);
+}
+[data-theme="light"] .main-timeline .circle {
+  border-color: rgba(160, 160, 180, 1);
+}
+[data-theme="light"] .main-timeline .circle:before {
+  background: rgba(160, 160, 180, 1);
+}
+[data-theme="light"] .main-timeline .circle span:before,
+[data-theme="light"] .main-timeline .circle span:after {
+  background: #ffffff;
+}
+[data-theme="light"] .main-timeline .timeline:nth-child(2n) .circle span:before,
+[data-theme="light"] .main-timeline .timeline:nth-child(2n) .circle span:after {
+  background: #ffffff;
+}
+[data-theme="light"] .main-timeline .year {
+  background: rgba(160, 160, 180, 1);
+  color: #ffffff;
+}
+[data-theme="light"] .main-timeline .company {
+  color: #1a1a2e;
+}
+[data-theme="light"] .main-timeline .title {
+  color: rgba(70, 70, 110, 1);
+}
+[data-theme="light"] .main-timeline .description {
+  color: #555567;
+}
+[data-theme="light"] .main-timeline .icon {
+  background: #ffffff;
+  border-color: rgba(160, 160, 180, 1);
+}
+[data-theme="light"] .main-timeline .icon:before {
+  background: rgba(160, 160, 180, 1);
+}
+[data-theme="light"] .main-timeline .icon span:before,
+[data-theme="light"] .main-timeline .icon span:after {
+  background: #ffffff;
+}
+[data-theme="light"] .main-timeline .timeline:nth-child(2n) .icon span:before,
+[data-theme="light"] .main-timeline .timeline:nth-child(2n) .icon span:after {
+  background: #ffffff;
+}
+[data-theme="light"] .main-timeline .timeline:first-child:before,
+[data-theme="light"] .main-timeline .timeline:last-child:before {
+  background: #888;
+  border-color: rgba(160, 160, 180, 1);
+}
+
+/* Project */
+[data-theme="light"] .project .box-container .box .content {
+  background: rgba(238, 241, 247, 0.96);
+}
+[data-theme="light"] .project .box-container .box .content .tag {
+  background: #dfe2ec;
+}
+[data-theme="light"] .project .box-container .box .content .tag h3 {
+  color: #1a1a2e;
+}
+[data-theme="light"] .project .desc p {
+  color: #333344;
+}
+[data-theme="light"] .project .desc .btns .btn {
+  color: #1a1a2e;
+  background: #d4d8e4;
+}
+[data-theme="light"] .project .desc .btns .btn:hover {
+  background: #0077ff;
+  color: #ffffff;
+}
+[data-theme="light"] .project .viewall {
+  background-color: #dfe2ec;
+}
+[data-theme="light"] .project .viewall h2 {
+  color: #1a1a2e;
+}
+[data-theme="light"] .project .viewall .btn {
+  background-color: #cdd1df;
+  color: #1a1a2e;
+}
+[data-theme="light"] .project .viewall .btn:hover {
+  background: #0077ff;
+  color: #ffffff;
+}
+[data-theme="light"] .project .viewall .btn.email {
+  background-color: #1a1a2e;
+  color: #ffffff;
+}
+
+/* Blog */
+[data-theme="light"] .blog .blog-post {
+  background: #ffffff;
+  box-shadow: 0 5px 15px rgba(26, 26, 46, 0.08);
+}
+[data-theme="light"] .blog .blog-post:hover {
+  box-shadow: 0 10px 25px rgba(0, 119, 255, 0.2);
+}
+[data-theme="light"] .blog .blog-title {
+  color: #1a1a2e;
+}
+[data-theme="light"] .blog .blog-excerpt {
+  color: #555567;
+}
+[data-theme="light"] .blog .blog-meta .read-time {
+  color: #8888a0;
+}
+[data-theme="light"] .blog .blog-tags .tag {
+  background: rgba(26, 26, 46, 0.06);
+  color: #333344;
+}
+[data-theme="light"] .blog .blog-tags .tag:hover {
+  background: rgba(0, 119, 255, 0.1);
+}
+
+/* Contact / Footer */
+[data-theme="light"] .footer {
+  background-color: #ffffff;
+}
+[data-theme="light"] .footer .box-container .box h3 {
+  color: #1a1a2e;
+}
+[data-theme="light"] .footer .box-container .box p {
+  color: #555567;
+}
+[data-theme="light"] .footer .credit {
+  color: #1a1a2e;
+  border-top-color: rgba(26, 26, 46, 0.1);
+}
+[data-theme="light"] .footer .box-container .box .share a {
+  background: rgb(40, 45, 65);
+  color: #ffffff;
+}
+[data-theme="light"] .footer .box-container .box .share a:hover {
+  background: transparent;
+  border-color: #0077ff;
+  color: #0077ff;
+}
+
+/* Skills (section commented out in HTML but here for completeness) */
+[data-theme="light"] .skills .container .bar {
+  background-color: #eef1f7;
+}
+[data-theme="light"] .skills .container .bar:hover {
+  background-color: rgba(0, 119, 255, 0.05);
+}
+[data-theme="light"] .skills .container .bar .info span {
+  color: #1a1a2e;
 }
