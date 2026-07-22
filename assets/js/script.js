@@ -1,182 +1,107 @@
-// Favicon
+// Favicon / title
 document.addEventListener("visibilitychange", function () {
-  if (document.visibilityState === "visible") {
-    document.title = "Portfolio | Nam Nguyen";
-    $("#favicon").attr("href", "assets/img/foto/nam.png");
-  } else {
-    document.title = "Portfolio | Nam Nguyen";
-    $("#favicon").attr("href", "assets/img/foto/nam.png");
-  }
+  document.title = "Portfolio | Nam Nguyen";
 });
 
-// script hamburger untuk mobile responsive
-
-var audio = document.getElementById("myVideo");
-var btn = document.getElementById("myBtn");
-
-//declare unmute icon variable
-var unmuteIcon = '<i class="fas fa-volume-up"></i>'
-
-//declare mute icon variable
-var muteIcon = '<i class="fas fa-volume-mute"></i>'
-
-function myFunction() {
-  // toggle the muted property of the video element
-  // if the video is muted, set the btn.innerHTML to unmuteIcon
-  // otherwise, set it to the muteIcon
-  if (audio.muted) {
-    audio.muted = false
-    audio.play()
-    btn.innerHTML = unmuteIcon;
-  } else {
-    audio.muted = true
-    btn.innerHTML = muteIcon;
-  }
-}
-
-
-const menuToggle = document.querySelector(".menu-toggle input");
-const nav = document.querySelector("nav ul");
-
-menuToggle.addEventListener("click", function () {
-  nav.classList.toggle("slide");
+// Mobile menu toggle
+const menuBtn = document.getElementById("menu-btn");
+const navLinksList = document.getElementById("nav-links");
+menuBtn.addEventListener("click", function () {
+  navLinksList.classList.toggle("open");
+});
+navLinksList.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => navLinksList.classList.remove("open"));
 });
 
-//script toggle navbar aktif
-$(document).on("click", "ul li", function () {
-  $(this).addClass("active").siblings().removeClass("active");
+// Audio toggle
+const audio = document.getElementById("bg-audio");
+const audioBtn = document.getElementById("audio-btn");
+audioBtn.addEventListener("click", function () {
+  audio.muted = !audio.muted;
+  if (!audio.muted) audio.play().catch(() => {});
+  audioBtn.querySelector("i").className = audio.muted
+    ? "fas fa-volume-mute"
+    : "fas fa-volume-up";
 });
 
-// scroll spy
-let section = document.querySelectorAll("section");
-let navLinks = document.querySelectorAll("ul li a");
-
-window.onscroll = () => {
-  section.forEach((sec) => {
-    let top = window.scrollY;
-    let offset = sec.offsetTop - 250;
-    let height = sec.offsetHeight;
-    let id = sec.getAttribute("id");
-
-    if (top >= offset && top < offset + height) {
-      navLinks.forEach((links) => {
-        links.classList.remove("active");
-        document.querySelector("ul li a[href*=" + id + "]").classList.add("active");
+// Nav active highlight (scroll spy)
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll("#nav-links a[href^='#']");
+const navObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      navLinks.forEach((link) => {
+        link.classList.toggle(
+          "active",
+          link.getAttribute("href") === "#" + entry.target.id
+        );
       });
-    }
+    });
+  },
+  { rootMargin: "-25% 0px -65% 0px" }
+);
+sections.forEach((sec) => navObserver.observe(sec));
+
+// Smooth scroll for in-page anchors
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", function (e) {
+    const target = document.querySelector(this.getAttribute("href"));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: "smooth" });
   });
-};
-
-// smooth scrolling
-$('a[href*="#"]').on("click", function (e) {
-  e.preventDefault();
-  $("html, body").animate(
-    {
-      scrollTop: $($(this).attr("href")).offset().top - 70,
-    },
-    500,
-    "linear"
-  );
 });
 
-let dataTyping = {
-  target: "typing-text",
-  text: '["Xin chào, mình là Nguyễn Hoài Nam", "Hi, I\'m Nam Hoai Nguyen", "大家好，我是软坏南"]',
-  delay: "1000",
-};
-
-class textType {
-  constructor(el, text, delay) {
-    this.text = text;
-    this.el = el;
-    this.loopNum = 0;
-    this.period = parseInt(delay, 10) || 2000;
-    this.txt = "";
-    this.tick();
-    this.isDeleting = false;
-  }
-  tick() {
-    let i = this.loopNum % this.text.length;
-    let fullTxt = this.text[i];
-
-    if (this.isDeleting) {
-      this.txt = fullTxt.substring(0, this.txt.length - 1);
+// Typing effect
+const typingTexts = [
+  "Xin chào, mình là Nguyễn Hoài Nam",
+  "Hi, I'm Nam Hoai Nguyen",
+  "大家好，我是软坏南",
+];
+function startTyping() {
+  const el = document.getElementById("typing-text");
+  if (!el) return;
+  let ti = 0,
+    ci = 0,
+    deleting = false;
+  const tick = () => {
+    const cur = typingTexts[ti];
+    if (deleting) {
+      ci = Math.max(0, ci - 1);
+      el.textContent = cur.substring(0, ci);
+      if (ci <= 0) {
+        deleting = false;
+        ti = (ti + 1) % typingTexts.length;
+      }
+      setTimeout(tick, 45);
     } else {
-      this.txt = fullTxt.substring(0, this.txt.length + 1);
+      ci++;
+      el.textContent = cur.substring(0, ci);
+      if (ci >= cur.length) {
+        deleting = true;
+        setTimeout(tick, 1800);
+        return;
+      }
+      setTimeout(tick, 75);
     }
-
-    this.el.innerText = this.txt;
-
-    let that = this;
-    let timing = Math.floor(200 - Math.random() * 100);
-
-    if (this.isDeleting) {
-      timing /= 2;
-    }
-
-    if (!this.isDeleting && this.txt === fullTxt) {
-      timing = this.period;
-      this.isDeleting = true;
-    } else if (this.isDeleting && this.txt === "") {
-      this.isDeleting = false;
-      this.loopNum++;
-      timing = 500;
-    }
-
-    setTimeout(function () {
-      that.tick();
-    }, timing);
-  }
+  };
+  tick();
 }
 
-window.onload = function () {
-  let el = document.getElementsByClassName(dataTyping.target);
-  for (let i = 0; i < el.length; i++) {
-    if (dataTyping.text) {
-      new textType(el[i], JSON.parse(dataTyping.text), dataTyping.delay);
-    }
-  }
-};
-
-// scroll up pop up
-let offset = 0;
+// Scroll-to-top button visibility
+const scrollTopBtn = document.getElementById("scroll-top");
 window.addEventListener("scroll", function () {
-  let st = window.pageYOffset;
-  if (st > offset) {
-    document.querySelector(".fa-arrow-up").classList.add("active");
-  } else {
-    document.querySelector(".fa-arrow-up").classList.remove("active");
-  }
+  scrollTopBtn.classList.toggle("active", window.scrollY > 400);
 });
 
-// script preloader
-const preload = document.querySelector("#preloader");
-const preloadDelay = 300;
-const body = document.querySelector("body");
-
+// Preloader
 window.addEventListener("load", function () {
+  const preloader = document.getElementById("preloader");
   setTimeout(() => {
-    preload.classList.add("hidden");
-    body.classList.remove("hidden");
-  }, preloadDelay);
-});
-
-// Theme toggle
-const themeToggle = document.getElementById("theme-toggle");
-const themeIcon = document.getElementById("theme-icon");
-const htmlEl = document.documentElement;
-
-function applyThemeIcon(theme) {
-  themeIcon.className = theme === "dark" ? "fas fa-sun" : "fas fa-moon";
-}
-
-// Sync icon with whatever theme was applied by the inline script
-applyThemeIcon(htmlEl.getAttribute("data-theme") || "dark");
-
-themeToggle.addEventListener("click", function () {
-  const current = htmlEl.getAttribute("data-theme");
-  const next = current === "dark" ? "light" : "dark";
-  htmlEl.setAttribute("data-theme", next);
-  localStorage.setItem("portfolio-theme", next);
-  applyThemeIcon(next);
+    preloader.classList.add("hidden");
+    setTimeout(() => preloader.remove(), 500);
+    document.body.classList.remove("hidden");
+  }, 300);
+  startTyping();
 });

@@ -11,14 +11,6 @@
 
     gtag('config', 'G-E2NHTRMLWG');
   </script>
-  <!-- Apply saved theme before render to prevent flash -->
-  <script>
-    (function() {
-      var saved = localStorage.getItem('portfolio-theme');
-      var sys = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', saved || sys);
-    })();
-  </script>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,12 +22,11 @@
   <!--? font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;500;600;700;800;900&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet" />
 
   <!--? Font Awesome -->
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-  <link rel="preconnect" href="https://code.jquery.com" crossorigin />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -48,669 +39,547 @@
 </head>
 
 <body class="hidden">
-  <!--?======================== Preloader start ========================= -->
-  <div class="preloader" id="preloader">
-    <div class="loading">
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="5.997cm"
-        height="3.492cm">
-        <image x="0px" y="0px" width="170px" height="99px"
-          xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKoAAABjCAMAAAA8T2vMAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACmlBMVEUAd/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/8Ad/////9GjV3OAAAA3HRSTlMACBwtP1p1jKO4wM3W293ezL+3oItyWD0rGQcBGzdgjrvc8vz78NmJMxcKWZjO8e3JkVMnBipinvmXWyQDOXjD9XE0e/7Ecyx0wmkUQezkljVevLRRDm7PxmEJ32fSXFTQSbqsE4r68wtWopDh/dRDDcWwfGpLMCkoLkBOdtPufgTmwZU6HoCz4iXohBEPaOBSBUIVfRi99nk4y6sM17WP5yBH6x9d+KY+AoM8yGZP6SOo6thfVe96HaS59EUv0bI7ho2FIq0QY20Sx3CUqpqnvspXr6GxUBrjbEwWsFzSqgAAAAFiS0dE3XBnsyEAAAAHdElNRQfmBxUSHiVZybUEAAAE1UlEQVR42tWb/V8URRjAjxIwRZIzCDk47/B4CQUJjo4uyPBQCo3OinzBlxLBlECOKDJFsCI0jBI00RILISGzrhTf8AWsjF7svexl/5h2b+/wOGZ3n92dnbn7/rrPPPv9zM1nZ+aZOZ1OA8LuuHNaeETk9LtmzIyaFX139Kyo2TH6OffExt0bPzdBixcqwZCYZJxnMifPZ9BYUlL1aeHp91HWzIhfsDAzi4GwKPv+nFwrJc+8B2xmC0jTR37Ug/aHSGsWFD68OF+Wpo9HTEXpBEWXOGYq0vRSvHRZCRHPxEcfK1Yjyg8FU+lyrUVX2B5X7clT9oRTQ0/ryicxeXqwPPW0QRvR8mdW4RT1sHrNWg1EIyqwi3JErcM8mSWUmjUR5Vi/AeMwMGx8VjNRjqXP4TJdsklTUY7KPByim6uqNTdlmC2O51WbbtVukE4mU+UoSNxGSJSjZrMK05wXFLyx2FKdX12rxLVuu1LR+hrwS5KjXQ22eS82hr80Lenl+KZXmnY4X91p3BU5R9+8W4ZrbUurIlPnbEj2Pa+9XrTxjbYMoSwFcwvtb7bvhcrG7FNgakyRSvvWpg67cz8o2duFndveAbmWvStX9IDEj19WWdTVLS9ledfBbMByvNYhL+2h90SSHXb1HIF1ZiCGvNij0rLvfyAjZckxwTzJvUZV26MC5/EPpVyzPwKn6zshkCNFv7JfjSdP9xqXhGu0E5hq4GN0gsxdGDx5treL73Wz+kBpSpGNd58cHMIlypHUMF/M9XAcIEcE8hf5pA2np4dTJtGO7ZFM4EC0+vR0PXZRjs+yxVxrJFr3TG3iCi/QRJTFuuxzEdcB0baxU+KP2rEO0UDcXwirfilWKugMjD5zVvOK2LDwhNsp3CouYL1/7ryySUkeFy4KqV4SbDM4Mjlyei4BUY5GgZVRqlCD+MlDvPkyIVGWK1eRqnsFwvfX+UdZOsrJmbIvP4lSNaODh675B60aJSnKYmhBqLrQsWN+IbXXiXYpz9ktU1RbkIE5/kNkJ3lRlhWB67l8NyrM7bdZM+Gf7mGkB3xhx1BBCYtvB3zVSslUp8tNnfRVRZYI0yaeZw3IzY+Try/dNv3mBipicGLpWHGKpinLt95yc9048vF3E/3+PbZlvmKsXT9EXo/tC0M//dFn2q6maESCUV996aYGdXmsZKz3mtponYCCOe81/Umjgxl8tHkXYLagN9Xd5E1/PkBbRJJB/rxUH/TjVKf7xWP6K4mNiUp+4+co+l9+SayeaSylkLYHgK2eTt1AWwOA1VPtlyq4BAXDnGlMK20NAENcRXYR8Ss6ShjlOhVSx6TP76zpH7QlQOyzsJvTQ7QtQHA7/2HaEiDCKhjmT9oSMP5it6dNtCVg9DJMB20HGLeymL9DYD3F8Q/DNNJ2AKJnjoXAcpqjf4Qx0nYAMs6YM9RnIUKD2ElLULH83Ikb6rMQ4V+mirYClDHmCm0FIIbmGbQVoLgZqsVpOSwYkXnxiB7He2kbgFl9mrYBlO6rt2grQDlSSdsAjP0gbQMwji7aBmCqaP+lDEx9mqaXfHDiHlefgxA7FN++Jq8aEsU/XjXYj1L9VNX/B4MUJa20DcD0B/8ZpY//aAvACZW9KkuY+hSkCJFaFUfwn6eHoqpmt7yx8z+ECzGqLlYmwwAAAABJRU5ErkJggg==" />
-      </svg>
-    </div>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="spinner"></div>
   </div>
-  <!--?======================== Preloader end ========================= -->
+
+  <!-- Background audio -->
+  <audio id="bg-audio" muted loop>
+    <source src="./assets/audio/audio.mp3" type="audio/mp3" />
+  </audio>
+
+  <!-- Particles -->
+  <div id="particles-js" style="position: fixed; inset: 0; z-index: 0; pointer-events: none;"></div>
 
   <!--?======================== Navbar start ========================= -->
   <nav class="navbar">
-    <ul>
-      <li><a class="active" href="#home">Home</a></li>
+    <a href="#home" class="brand">NamHN</a>
+    <ul id="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#education">Education</a></li>
-      <!-- <li><a href="#honors">Honors</a></li> -->
-      <li><a href="#project">Project</a></li>
+      <li><a href="#project">Projects</a></li>
+      <li><a href="#gallery">Gallery</a></li>
       <li><a href="#blog">Blog</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode">
-      <i class="fas fa-moon" id="theme-icon"></i>
-    </button>
-
-    <div class="menu-toggle">
-      <input type="checkbox" />
-      <span></span>
-      <span></span>
-      <span></span>
+    <div class="nav-actions">
+      <button id="audio-btn" class="icon-btn" aria-label="Toggle audio">
+        <i class="fas fa-volume-mute"></i>
+      </button>
+      <button id="menu-btn" class="icon-btn" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
   </nav>
   <!--?======================== Navbar end ========================= -->
 
   <!--?======================== Home start ========================= -->
-  <section class="home" id="home">
-    <!-- <div id="particles-js"></div> -->
-    <!-- audio file -->
-    <audio autoplay id="myVideo" autoloop muted>
-      <source src="./assets/audio/audio.mp3" type="audio/mp3">
-    </audio>
-    <button id="myBtn" onclick="myFunction()"><i class="fas fa-volume-mute"></i></button>
-    <div id="particles-js" style="position: fixed; width: 100%; height: 100%;"></div>
-    <div class="test">
-      <h2>
-        <span class="typing-text"></span><span>|</span>
-      </h2>
-      <h2>
-        Welcome to my playground
-      </h2>
-      <div class="new">
-        <a href="mailto:namnguyen892000@gmail.com" class="email"><span>Email Me</span>
-          <i class=""></i>
+  <section id="home">
+    <div class="glow"></div>
+    <div class="hero-inner">
+      <h1 id="hero-name">
+        <span id="typing-text"></span><span class="cursor">|</span>
+      </h1>
+      <h2 class="subtitle">Welcome to my playground</h2>
+      <div id="hero-btns">
+        <a href="mailto:namnguyen892000@gmail.com" class="btn-solid">
+          <i class="fas fa-envelope"></i> Email Me
         </a>
-        <a href="assets/Resume.pdf" class="cv"><span>Download CV </span>
-          <i class=""></i>
+        <a href="assets/Resume.pdf" target="_blank" class="btn-outline">
+          <i class="fas fa-download"></i> Download CV
         </a>
       </div>
+      <div class="hero-socials">
+        <a href="https://www.linkedin.com/in/namhn89/" target="_blank" aria-label="LinkedIn"><i
+            class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/namhn89" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:namnguyen892000@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="scroll-cue">
+      <span>Scroll</span>
+      <div class="line"></div>
     </div>
   </section>
   <!--?======================== Home end ========================= -->
 
   <!--?======================== About start ========================= -->
-  <section class="about" id="about">
-    <!--? about me start -->
-    <h2 class="heading"><i class="fas fa-user-alt"></i> About Me</h2>
-    <div class="about-me">
-      <div class="foto">
-        <img data-tilt src="./assets/img/profile/nam.png" alt="Nam Nguyen" loading="lazy" decoding="async" />
+  <section id="about" class="alt">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <p class="eyebrow">Get to know me</p>
+        <h2 class="sec-title">About Me</h2>
       </div>
-      <div class="about-desc">
-        <p>Hi there, My name is Nam Nguyen.
-          I am a student at Vietnam National University.
-          As a motivated and enthusiastic college student with fundamental knowledge of computer science and
-          mathematics.
-          When I was an undergraduate, I've participated in several competitive programming contests.
-          Recently, I'm pursuing to become a software engineer.
-          I am flexible and eager to learn more about technical skills and working knowledge of software applications to
-          broaden my horizon.
-          Besides, I enjoy playing computer games like League of Legends (LOL) and VALORANT.
-        </p>
+      <div id="about-inner">
+        <div id="about-photo">
+          <div class="about-photo-frame">
+            <div class="pic">
+              <img src="./assets/img/profile/nam.png" alt="Nam Nguyen" loading="lazy" decoding="async" />
+            </div>
+            <div class="badge">🐳</div>
+          </div>
+        </div>
+        <div class="about-body">
+          <p>
+            Hi there! My name is <strong>Nam Nguyen</strong>, a Software Engineer based in Hanoi, Vietnam. I
+            graduated from Vietnam National University with a Bachelor's in Computer Engineering.
+          </p>
+          <p>
+            I've built experience across backend engineering, data pipelines, and AI/ML systems — working at KALAPA,
+            SETA International, BlueOC, AICycle, WorldQuant, VinAI Research, and NERD.
+          </p>
+          <p>
+            Passionate about competitive programming and distributed data systems. Outside of work, I enjoy LOL and
+            VALORANT.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Python</span>
+            <span class="pill">FastAPI</span>
+            <span class="pill">PostgreSQL</span>
+            <span class="pill">Apache Airflow</span>
+            <span class="pill">Machine Learning</span>
+            <span class="pill">Deep Learning</span>
+          </div>
+        </div>
       </div>
     </div>
-    <!--? about me end -->
   </section>
   <!--?======================== About end ========================= -->
 
   <!--?======================== Work start ========================= -->
-  <section class="work" id="work">
-    <h2 class="heading"><i class="fas fa-briefcase"></i> Work</h2>
-    <div class="container py-5">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="main-timeline">
-            <div class="timeline">
-              <div class="timeline-content">
-                <div class="circle"><span class="homebox">
-                    <img src="assets/img/company_logo/kalapa.jpeg" class="img" loading="lazy" decoding="async">
-                  </span></div>
-                <div class="content">
-                  <span class="year">January 2026 - Current</span>
-                  <h2 class="company h2">KALAPA</h2>
-                  <h3 class="title h4">Software Engineer</h3>
-                  <p class="description">
-                    Implementing backend services using Python, FastAPI, and PostgreSQL.
-                  </p>
-                  <div class="icon"><span></span></div>
-                </div>
-              </div>
-            </div>
-            <div class="timeline">
-              <div class="timeline-content">
-                <div class="circle"><span class="homebox">
-                    <img src="assets/img/company_logo/seta.jpeg" class="img" loading="lazy" decoding="async">
-                  </span></div>
-                <div class="content">
-                  <span class="year">May 2022 - December 2025</span>
-                  <h2 class="company h2">SETA International Vietnam</h2>
-                  <h3 class="title h4">Software Engineer</h3>
-                  <p class="description">
-                    Built the data pipeline and the webhook for ingesting data from 100,000 documents across Confluence,
-                    Jira, and Zendesk<br>
-                    Constructed a QnA bot leveraging the Larg Language Model (Gemini), assisting engineers in searching
-                    appropriate documents through various Google Cloud tools.
-                  </p>
-                  <div class="icon"><span></span></div>
-                </div>
-              </div>
-            </div>
-            <div class="timeline">
-              <div class="timeline-content">
-                <div class="circle"><span class="homebox">
-                    <img src="assets/img/company_logo/blueoc.jpeg" class="img" loading="lazy" decoding="async">
-                  </span></div>
-                <div class="content">
-                  <span class="year">July 2024 - December 2025</span>
-                  <h2 class="company h2">BlueOC (Part-time)</h2>
-                  <h3 class="title h4">Data Engineer</h3>
-                  <p class="description">
-                    Contributed to the development and enhancement of data systems and built data pipelines for client
-                    companies, improving data integration and processing efficiency.
-                  </p>
-                  <div class="icon"><span></span></div>
-                </div>
-              </div>
-            </div>
+  <section id="work" class="base">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <p class="eyebrow">My journey</p>
+        <h2 class="sec-title">Work Experience</h2>
+      </div>
+      <div class="tl-wrap">
 
-            <!-- <div class="timeline">
-              <div class="timeline-content">
-                <div class="circle"><span class="homebox">
-                    <img src="assets/img/company_logo/favicon.png" class="img" loading="lazy" decoding="async">
-                  </span></div>
-                <div class="content">
-                  <span class="year">Jan 2024 - December 2025</span>
-                  <h2 class="company h2">GridBeyond</h2>
-                  <h3 class="title h4">Software Engineer</h3>
-                  <p class="description">
-                    Built and maintained the data pipeline and monitoring system for the data analysis tasks.<br>
-                    Designed the backend infrastructure and data model for the bid optimization within the renewable
-                    energy trading
-                    market in the UK and Ireland.<br>
-                    Supported the data scientists by evaluating the forecast metrics on the models in production using
-                    Grafana
-                  </p>
-                  <div class="icon"><span></span></div>
-                </div>
-              </div>
-            </div> -->
-            <div class="timeline">
-              <div class="timeline-content">
-                <div class="circle"><span class="homebox">
-                    <img src="assets/img/company_logo/aicycle.jpeg" class="img" loading="lazy" decoding="async">
-                  </span></div>
-                <div class="content">
-                  <span class="year">May 2022 - Dec 2023</span>
-                  <h2 class="company h2">AICycle (Part-time)</h2>
-                  <h3 class="title h4">Software Engineer</h3>
-                  <p class="description">
-                    Developing an AI system involves using Triton to deploy deep learning models and automate their
-                    testing.<br>
-                    Constructed a data pipeline for the purpose of crawling, data processing with the utilization of
-                    Airflow.
-                  </p>
-                  <div class="icon"><span></span></div>
-                </div>
-              </div>
+        <div class="tl-item">
+          <div class="tl-card">
+            <div class="tl-card-inner active">
+              <div class="tl-meta"><span class="tl-date">Jan 2026 — Present</span></div>
+              <div class="tl-title">Software Engineer</div>
+              <div class="tl-company">KALAPA</div>
+              <div class="tl-desc">Implementing backend services using Python, FastAPI, and PostgreSQL.</div>
+              <div class="tl-tags"><span class="tl-tag">Python</span><span class="tl-tag">FastAPI</span><span
+                  class="tl-tag">PostgreSQL</span></div>
             </div>
-            <div class="timeline">
-              <div class="timeline-content">
-                <div class="circle"><span class="homebox"><img src="assets/img/company_logo/worldquant.jpeg"
-                      loading="lazy" decoding="async" class="img" /></span></div>
-                <div class="content">
-                  <span class="year">Aug 2021 - Jan 2022</span>
-                  <h2 class="company h2">WorldQuant</h2>
-                  <h3 class="title h4">Quantitative Research Intern</h3>
-                  <p class="description">
-                    Developed and integrated a new deep learning framework for portfolio optimization on the backtesting
-                    system.<br>
-                    Analyzed and extracted the impact of sentiment in earnings calls on stock price using natural
-                    language processing
-                    methods.
-                  </p>
-                  <div class="icon"><span></span></div>
-                </div>
-              </div>
+          </div>
+          <div class="tl-logo">
+            <div class="tl-logo-inner"><img src="assets/img/company_logo/kalapa.jpeg" alt="KALAPA" loading="lazy" />
             </div>
-            <div class="timeline">
-              <div class="timeline-content">
-                <div class="circle"><span class="homebox"><img src="assets/img/company_logo/vinai.jpeg" loading="lazy"
-                      decoding="async" class="img"></span></div>
-                <div class="content">
-                  <span class="year">Jun 2020 - Oct 2020</span>
-                  <h2 class="company h2">VinAI Research</h2>
-                  <h3 class="title h4">Research Intern</h3>
-                  <p class="description">
-                    Built, trained, and tested various neural network models for point cloud classification &
-                    segmentation tasks.<br>
-                    Implemented experiments on the backdoor attack to explore vulnerable models for tasks featuring
-                    point cloud
-                  </p>
-                  <div class="icon"><span></span></div>
-                </div>
-              </div>
-            </div>
-            <div class="timeline">
-              <div class="timeline-content">
-                <div class="circle"><span class="homebox"><img src="assets/img/company_logo/nerd.jpeg" loading="lazy"
-                      decoding="async" class="img"></span></div>
-                <div class="content">
-                  <span class="year">Sep 2018 - Dec 2019</span>
-                  <h2 class="company h2">NERD</h2>
-                  <h3 class="title h4">Software Engineer Intern</h3>
-                  <p class="description">
-                    Created a bot crawler to collect data for training machine learning models.<br>
-                    Worked on Natural Language Processing (NLP) tasks such as Name Entity Recognition, Automatic Speech
-                    Recognition, and
-                    Diacritic Restoration in Vietnamese.
-                  </p>
-                  <div class="icon"><span></span></div>
-                </div>
-              </div>
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-empty"></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-empty"></div>
+          <div class="tl-logo">
+            <div class="tl-logo-inner"><img src="assets/img/company_logo/seta.jpeg" alt="SETA International Vietnam"
+                loading="lazy" /></div>
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-card-inner">
+              <div class="tl-meta"><span class="tl-date">May 2022 — Dec 2025</span></div>
+              <div class="tl-title">Software Engineer</div>
+              <div class="tl-company">SETA International Vietnam</div>
+              <div class="tl-desc">Built data pipeline and webhook ingesting 100k+ documents across Confluence, Jira,
+                and Zendesk. Constructed a QnA bot leveraging Gemini LLM via Google Cloud tools.</div>
+              <div class="tl-tags"><span class="tl-tag">Python</span><span class="tl-tag">Gemini LLM</span><span
+                  class="tl-tag">GCP</span><span class="tl-tag">Webhook</span></div>
             </div>
           </div>
         </div>
+
+        <div class="tl-item">
+          <div class="tl-card">
+            <div class="tl-card-inner">
+              <div class="tl-meta"><span class="tl-date">Jul 2024 — Dec 2025</span></div>
+              <div class="tl-title">Data Engineer <span class="part-time">(Part-time)</span></div>
+              <div class="tl-company">BlueOC</div>
+              <div class="tl-desc">Built data pipelines for client companies, improving data integration and
+                processing efficiency.</div>
+              <div class="tl-tags"><span class="tl-tag">Data Engineering</span><span class="tl-tag">ETL</span></div>
+            </div>
+          </div>
+          <div class="tl-logo">
+            <div class="tl-logo-inner"><img src="assets/img/company_logo/blueoc.jpeg" alt="BlueOC" loading="lazy" />
+            </div>
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-empty"></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-empty"></div>
+          <div class="tl-logo">
+            <div class="tl-logo-inner"><img src="assets/img/company_logo/aicycle.jpeg" alt="AICycle" loading="lazy" />
+            </div>
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-card-inner">
+              <div class="tl-meta"><span class="tl-date">May 2022 — Dec 2023</span></div>
+              <div class="tl-title">Software Engineer <span class="part-time">(Part-time)</span></div>
+              <div class="tl-company">AICycle</div>
+              <div class="tl-desc">Deployed deep learning models using Triton, automated testing. Built data crawling
+                pipeline with Airflow.</div>
+              <div class="tl-tags"><span class="tl-tag">Triton</span><span class="tl-tag">Airflow</span><span
+                  class="tl-tag">Deep Learning</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-card">
+            <div class="tl-card-inner">
+              <div class="tl-meta"><span class="tl-date">Aug 2021 — Jan 2022</span></div>
+              <div class="tl-title">Quantitative Research Intern</div>
+              <div class="tl-company">WorldQuant</div>
+              <div class="tl-desc">Developed deep learning framework for portfolio optimization. Analyzed sentiment
+                in earnings calls via NLP to predict stock price movements.</div>
+              <div class="tl-tags"><span class="tl-tag">Deep Learning</span><span class="tl-tag">NLP</span><span
+                  class="tl-tag">Finance</span></div>
+            </div>
+          </div>
+          <div class="tl-logo">
+            <div class="tl-logo-inner"><img src="assets/img/company_logo/worldquant.jpeg" alt="WorldQuant"
+                loading="lazy" /></div>
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-empty"></div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-empty"></div>
+          <div class="tl-logo">
+            <div class="tl-logo-inner"><img src="assets/img/company_logo/vinai.jpeg" alt="VinAI Research"
+                loading="lazy" /></div>
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-card">
+            <div class="tl-card-inner">
+              <div class="tl-meta"><span class="tl-date">Jun 2020 — Oct 2020</span></div>
+              <div class="tl-title">Research Intern</div>
+              <div class="tl-company">VinAI Research</div>
+              <div class="tl-desc">Built and trained neural networks for 3D point cloud classification &amp;
+                segmentation. Implemented backdoor attack experiments on point cloud models.</div>
+              <div class="tl-tags"><span class="tl-tag">Point Cloud</span><span class="tl-tag">Deep
+                  Learning</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-card">
+            <div class="tl-card-inner">
+              <div class="tl-meta"><span class="tl-date">Sep 2018 — Dec 2019</span></div>
+              <div class="tl-title">Software Engineer Intern</div>
+              <div class="tl-company">NERD</div>
+              <div class="tl-desc">Built bot crawlers for ML training data. Worked on NLP tasks: NER, Speech
+                Recognition, and Diacritic Restoration in Vietnamese.</div>
+              <div class="tl-tags"><span class="tl-tag">NLP</span><span class="tl-tag">Web Crawling</span><span
+                  class="tl-tag">Vietnamese NLP</span></div>
+            </div>
+          </div>
+          <div class="tl-logo">
+            <div class="tl-logo-inner"><img src="assets/img/company_logo/nerd.jpeg" alt="NERD" loading="lazy" /></div>
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-empty"></div>
+        </div>
+
       </div>
     </div>
   </section>
   <!--?======================== Work end ========================= -->
 
   <!--?======================== Education start ========================= -->
-  <section class="education" id="education">
-    <h2 class="heading"><i class="fas fa-graduation-cap"></i> Education</h2>
-    <div class="education-container">
-
-      <div class="education-item">
-        <div class="education-icon">
-          <i class="fas fa-university"></i>
-        </div>
-        <div class="education-content">
-          <div class="education-header">
-            <div>
-              <h3 class="degree">Bachelor's Degree, Computer Engineering</h3>
-              <h4 class="school">Vietnam National University, Hanoi</h4>
+  <section id="education" class="alt">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <p class="eyebrow">Academic background</p>
+        <h2 class="sec-title">Education</h2>
+      </div>
+      <div class="edu-list">
+        <div class="edu-item featured">
+          <div class="edu-logo"><img src="assets/img/vnu.png" alt="VNU" /></div>
+          <div class="edu-body">
+            <div class="edu-header">
+              <div>
+                <h3 class="edu-degree">Bachelor's Degree, Computer Engineering</h3>
+                <p class="edu-school">Vietnam National University, Hanoi</p>
+              </div>
+              <span class="edu-date">Sep 2018 — Jun 2022</span>
             </div>
-            <span class="year">Sep 2018 - Jun 2022</span>
+            <p class="edu-desc">Focused on software engineering, data structures, algorithms, and AI. Active
+              participant in competitive programming and research in ML and computer vision.</p>
           </div>
-          <div class="education-details">
-            <p class="description">
-              Focused on software engineering, data structures, algorithms, and artificial intelligence.
-              Participated in competitive programming contests and research projects in machine learning and computer
-              vision.
-            </p>
-            <!-- <div class="achievements">
-                            <h5>Key Achievements:</h5>
-                            <ul>
-                                <li>Thesis: Deep Learning Based Point Cloud Coding</li>
-                                <li>Research Intern at VinAI Research - Point Cloud Classification & Segmentation</li>
-                                <li>Quantitative Research Intern at WorldQuant - Portfolio Optimization</li>
-                                <li>Active participant in competitive programming competitions</li>
-                            </ul>
-                        </div> -->
-            <!-- <div class="coursework">
-                            <h5>Relevant Coursework:</h5>
-                            <div class="course-tags">
-                                <span class="course-tag">Data Structures & Algorithms</span>
-                                <span class="course-tag">Machine Learning</span>
-                                <span class="course-tag">Deep Learning</span>
-                                <span class="course-tag">Database Systems</span>
-                                <span class="course-tag">Software Engineering</span>
-                                <span class="course-tag">Computer Networks</span>
-                                <span class="course-tag">Artificial Intelligence</span>
-                            </div>
-                        </div> -->
+        </div>
+        <div class="edu-item">
+          <div class="edu-logo"><img src="assets/img/cvp.png" alt="CVP" /></div>
+          <div class="edu-body">
+            <div class="edu-header">
+              <div>
+                <h3 class="edu-degree">High School Diploma, Informatics</h3>
+                <p class="edu-school">Vinh Phuc Gifted High School</p>
+              </div>
+              <span class="edu-date">Jun 2015 — Sep 2018</span>
+            </div>
+            <p class="edu-desc">Specialized in Informatics — strong foundation in programming, algorithms, and
+              competitive programming.</p>
           </div>
         </div>
       </div>
-
-      <div class="education-item">
-        <div class="education-icon">
-          <i class="fas fa-school"></i>
-        </div>
-        <div class="education-content">
-          <div class="education-header">
-            <div>
-              <h3 class="degree">High School Diploma, Informatics</h3>
-              <h4 class="school">Vinh Phuc Gifted High School</h4>
-            </div>
-            <span class="year">June 2015 - Sep 2018</span>
-          </div>
-          <div class="education-details">
-            <p class="description">
-              Specialized in Informatics at a gifted high school, building strong foundation in programming,
-              algorithms, and computational thinking through competitive programming and advanced coursework.
-            </p>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
   <!--?======================== Education end ========================= -->
 
-  <!--?======================== Honors & Awards start ========================= -->
-  <!-- <section class="honors" id="honors">
-        <h2 class="heading"><i class="fas fa-award"></i> Honors & Awards</h2>
-        <div class="honors-container">
-
-            <div class="honor-item">
-                <div class="honor-icon">
-                    <i class="fas fa-trophy"></i>
-                </div>
-                <div class="honor-content">
-                    <div class="honor-header">
-                        <div>
-                            <h3 class="honor-title">Second Prize in The Vietnam National Mathematics Olympiad for University Students</h3>
-                            <h4 class="issuer">Vietnam Mathematical Society (VMS)</h4>
-                        </div>
-                        <span class="honor-date">Apr 2019</span>
-                    </div>
-                    <div class="honor-details">
-                        <p class="description">
-                            An annual national competition in Algebra/Calculus for University Students
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="honor-item">
-                <div class="honor-icon">
-                    <i class="fas fa-trophy"></i>
-                </div>
-                <div class="honor-content">
-                    <div class="honor-header">
-                        <div>
-                            <h3 class="honor-title">ACM ICPC Asia Regional Contest</h3>
-                            <h4 class="issuer">ICPC</h4>
-                        </div>
-                        <span class="honor-date">Dec 2018</span>
-                    </div>
-                    <div class="honor-details">
-                        <p class="description">
-                            The ACM International Collegiate Programming Contest (ICPC) is a multi-tier, team-based programming competition among universities worldwide.
-                        </p>
-                          <p class="description">Competed in a team of three to solve 10-12 algorithmic problems in five hours contest using C++/Java</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="honor-item">
-                <div class="honor-icon">
-                    <i class="fas fa-medal"></i>
-                </div>
-                <div class="honor-content">
-                    <div class="honor-header">
-                        <div>
-                            <h3 class="honor-title">Gold Medal in Vietnam's Northern Delta and Coastal Areas Olympiad</h3>
-                            <h4 class="issuer">Regional Competition</h4>
-                        </div>
-                        <span class="honor-date">Apr 2017</span>
-                    </div>
-                    <div class="honor-details">
-                        <p class="description">
-                            An annual competition for excellent students of specialized and gifted high schools in the Northern Delta and Coastal Areas
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section> -->
-  <!--?======================== Honors & Awards end ========================= -->
-
-  <!--?======================== Skills start ========================= -->
-  <!-- <section class="skills" id="skills">
-      <h2 class="heading"><i class="fas fa-laptop-code"></i> My Skills</h2>
-    </section> -->
-  <!--?======================== Skills end ========================= -->
-
   <!--?======================== Project start ========================= -->
-  <section class="project" id="project">
-    <h2 class="heading"><i class="fas fa-laptop-code"></i> Project </h2>
-    <div class="box-container">
-      <!--? GAN Project -->
-      <div class="box">
-        <img draggable="false" src="assets/img/project/gan.png" alt="gan" loading="lazy" decoding="async" />
-        <div class="content">
-          <div class="tag">
+  <section id="project" class="base">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <p class="eyebrow">What I've built</p>
+        <h2 class="sec-title">Projects</h2>
+      </div>
+      <div id="projects-grid">
+        <div class="proj-card">
+          <div class="proj-thumb"><img src="assets/img/project/gan.png" alt="GAN" loading="lazy" /></div>
+          <div class="proj-body">
             <h3>GAN Project</h3>
-          </div>
-          <div class="desc">
-            <p>Generative Adversarial Network Project</p>
-            <p>Build with: <i class="fab fa-python"></i></p>
-            <div class="btns">
-              <a href="" class="btn view" target="_blank"><i class="fas fa-eye"></i> View</a>
-              <a href="https://github.com/namhn89/gan-project" class="btn code" target="_blank">Code <i
-                  class="fas fa-code"></i></a>
+            <p>Generative Adversarial Network for image generation tasks.</p>
+            <div class="proj-tags"><span><i class="fab fa-python"></i> Python</span></div>
+            <div class="proj-links">
+              <a href="https://github.com/namhn89/gan-project" target="_blank"><i class="fas fa-code"></i> View
+                Code</a>
             </div>
           </div>
         </div>
-      </div>
-
-      <!--? PointNet-Implementation -->
-      <div class="box">
-        <img draggable="false" src="assets/img/project/pointnet.jpg" alt="pointnet" loading="lazy" decoding="async" />
-        <div class="content">
-          <div class="tag">
-            <h3>PointNet-Implementation</h3>
-          </div>
-          <div class="desc">
-            <p>Just simple implementation for PointNet</p>
-            <p>Build with: <i class="fab fa-python"></i>
-            <div class="btns">
-              <a href="" class="btn view" target="_blank"><i class="fas fa-eye"></i> View</a>
-              <a href="https://github.com/namhn89/PointNet-Implementation" class="btn code" target="_blank">Code <i
-                  class="fas fa-code"></i></a>
+        <div class="proj-card">
+          <div class="proj-thumb"><img src="assets/img/project/pointnet.jpg" alt="PointNet" loading="lazy" /></div>
+          <div class="proj-body">
+            <h3>PointNet Implementation</h3>
+            <p>3D point cloud classification and segmentation.</p>
+            <div class="proj-tags"><span><i class="fab fa-python"></i> Python</span></div>
+            <div class="proj-links">
+              <a href="https://github.com/namhn89/PointNet-Implementation" target="_blank"><i
+                  class="fas fa-code"></i> View Code</a>
             </div>
           </div>
         </div>
-      </div>
-
-      <!--? My Algorithm Collection -->
-      <div class="box">
-        <img draggable="false" src="assets/img/project/algorithm.jpg" alt="my-algorithm" loading="lazy"
-          decoding="async" />
-        <div class="content">
-          <div class="tag">
+        <div class="proj-card">
+          <div class="proj-thumb"><img src="assets/img/project/algorithm.jpg" alt="Algorithms" loading="lazy" /></div>
+          <div class="proj-body">
             <h3>Algorithm Collection</h3>
-          </div>
-          <div class="desc">
-            <p>Interview preparation materials and competitive programming competitions</p>
-            <p>Build with: <i class="fab fa-python"></i>, <i class="fab fa-java"></i></p>
-            <div class="btns">
-              <a href="" class="btn view" target="_blank"><i class="fas fa-eye"></i> View</a>
-              <a href="https://github.com/namhn89/algorithm" class="btn code" target="_blank">Code <i
-                  class="fas fa-code"></i></a>
+            <p>Interview prep and competitive programming solutions.</p>
+            <div class="proj-tags"><span><i class="fab fa-python"></i> Python</span><span><i
+                  class="fab fa-java"></i> Java</span></div>
+            <div class="proj-links">
+              <a href="https://github.com/namhn89/algorithm" target="_blank"><i class="fas fa-code"></i> View
+                Code</a>
             </div>
           </div>
         </div>
-      </div>
-
-      <!--? My Portfolio -->
-      <div class="box">
-        <img draggable="false" src="assets/img/project/portfolio.png" alt="my-portfolio" loading="lazy"
-          decoding="async" />
-        <div class="content">
-          <div class="tag">
+        <div class="proj-card">
+          <div class="proj-thumb"><img src="assets/img/project/portfolio.png" alt="Portfolio" loading="lazy" /></div>
+          <div class="proj-body">
             <h3>My Portfolio</h3>
-          </div>
-          <div class="desc">
-            <p>Personal Portfolio</p>
-            <p>Build with: <i class="fab fa-html5"></i>, <i class="fab fa-css3-alt"></i>, <i
-                class="fab fa-js-square"></i></p>
-            <div class="btns">
-              <a href="https://namhn89.github.io/" class="btn view" target="_blank"><i class="fas fa-eye"></i> View</a>
-              <a href="https://github.com/namhn89/namhn89.github.io" class="btn code" target="_blank">Code <i
-                  class="fas fa-code"></i></a>
+            <p>Personal portfolio website — HTML, CSS, JavaScript.</p>
+            <div class="proj-tags"><span><i class="fab fa-html5"></i> HTML</span><span><i
+                  class="fab fa-css3-alt"></i> CSS</span></div>
+            <div class="proj-links">
+              <a href="https://namhn89.github.io/" target="_blank"><i class="fas fa-eye"></i> Live</a>
+              <a href="https://github.com/namhn89/namhn89.github.io" target="_blank"><i class="fas fa-code"></i>
+                Code</a>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </section>
   <!--?======================== Project end ========================= -->
 
-  <!--?======================== Blog start ========================= -->
-  <section class="blog" id="blog">
-    <h2 class="heading"><i class="fas fa-blog"></i> Blog</h2>
-    <div class="blog-container">
+  <!--?======================== Gallery start ========================= -->
+  <section id="gallery" class="alt">
+    <div class="sec-inner" style="max-width: 1200px;">
+      <div class="sec-head">
+        <p class="eyebrow">Moments &amp; memories</p>
+        <h2 class="sec-title">Gallery</h2>
+        <p class="gal-note">Each album is a destination — click to view all photos.</p>
+      </div>
+      <div id="gallery-grid">
+        <a href="gallery/hanoi.html" class="gal-card">
+          <div class="gal-thumb"><i class="fas fa-image"></i></div>
+          <div class="gal-meta">
+            <h3>Hanoi</h3>
+            <p>Vietnam · June 2024</p>
+          </div>
+        </a>
+        <a href="gallery/hochiminh.html" class="gal-card">
+          <div class="gal-thumb"><i class="fas fa-image"></i></div>
+          <div class="gal-meta">
+            <h3>Ho Chi Minh City</h3>
+            <p>Vietnam · August 2024</p>
+          </div>
+        </a>
+        <a href="gallery/danang.html" class="gal-card">
+          <div class="gal-thumb"><i class="fas fa-image"></i></div>
+          <div class="gal-meta">
+            <h3>Da Nang</h3>
+            <p>Vietnam · December 2023</p>
+          </div>
+        </a>
+        <a href="gallery/tokyo.html" class="gal-card">
+          <div class="gal-thumb"><i class="fas fa-image"></i></div>
+          <div class="gal-meta">
+            <h3>Tokyo</h3>
+            <p>Japan · March 2024</p>
+          </div>
+        </a>
+        <a href="gallery/seoul.html" class="gal-card">
+          <div class="gal-thumb"><i class="fas fa-image"></i></div>
+          <div class="gal-meta">
+            <h3>Seoul</h3>
+            <p>South Korea · November 2023</p>
+          </div>
+        </a>
+        <a href="gallery/singapore.html" class="gal-card">
+          <div class="gal-thumb"><i class="fas fa-image"></i></div>
+          <div class="gal-meta">
+            <h3>Singapore</h3>
+            <p>Singapore · January 2025</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!--?======================== Gallery end ========================= -->
 
-      <!--? Blog Post 1 -->
-      <article class="blog-post">
-        <div class="blog-image">
-          <img src="./assets/img/blog/airflow.png" alt="Data Engineering" loading="lazy" decoding="async" />
-          <div class="blog-date">
-            <span class="day">15</span>
-            <span class="month">Dec 2025</span>
-          </div>
-        </div>
-        <div class="blog-content">
-          <div class="blog-meta">
-            <span class="category"><i class="fas fa-tag"></i> Data Engineering</span>
-            <span class="read-time"><i class="fas fa-clock"></i> 5 min read</span>
-          </div>
-          <h3 class="blog-title">Building Scalable Data Pipelines with Apache Airflow</h3>
-          <p class="blog-excerpt">
-            Exploring best practices for designing and implementing robust data pipelines using Apache Airflow.
-            Learn about DAG optimization, error handling, and monitoring strategies for production environments.
-          </p>
-          <div class="blog-footer">
+  <!--?======================== Blog start ========================= -->
+  <section id="blog" class="base">
+    <div class="sec-inner">
+      <div class="sec-head">
+        <p class="eyebrow">Thoughts &amp; insights</p>
+        <h2 class="sec-title">Blog</h2>
+      </div>
+      <div id="blog-grid">
+        <article class="blog-card">
+          <div class="blog-thumb"><img src="./assets/img/blog/airflow.png" alt="Airflow" loading="lazy" /></div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat">Data Engineering</span>
+              <span class="read-time"><i class="fas fa-clock"></i> 5 min</span>
+              <span class="date">Dec 15, 2025</span>
+            </div>
+            <h3>Building Scalable Data Pipelines with Apache Airflow</h3>
+            <p>DAG optimization, error handling, and monitoring for production environments.</p>
             <a href="blog/data-pipelines-airflow.html" class="read-more">Read More <i
                 class="fas fa-arrow-right"></i></a>
-            <div class="blog-tags">
-              <span class="tag">Airflow</span>
-              <span class="tag">ETL</span>
-              <span class="tag">Python</span>
+          </div>
+        </article>
+        <article class="blog-card">
+          <div class="blog-thumb"><img src="./assets/img/blog/llm.png" alt="LLM" loading="lazy" /></div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat">Machine Learning</span>
+              <span class="read-time"><i class="fas fa-clock"></i> 8 min</span>
+              <span class="date">Dec 08, 2025</span>
             </div>
-          </div>
-        </div>
-      </article>
-
-      <!--? Blog Post 2 -->
-      <article class="blog-post">
-        <div class="blog-image">
-          <img src="./assets/img/blog/llm.png" alt="Machine Learning" loading="lazy" decoding="async" />
-          <div class="blog-date">
-            <span class="day">08</span>
-            <span class="month">Dec 2025</span>
-          </div>
-        </div>
-        <div class="blog-content">
-          <div class="blog-meta">
-            <span class="category"><i class="fas fa-tag"></i> Machine Learning</span>
-            <span class="read-time"><i class="fas fa-clock"></i> 8 min read</span>
-          </div>
-          <h3 class="blog-title">Large Language Models in Production: Lessons Learned</h3>
-          <p class="blog-excerpt">
-            Sharing experiences from deploying a QnA bot powered by Gemini LLM. Topics include prompt engineering,
-            context management, cost optimization, and handling production challenges at scale.
-          </p>
-          <div class="blog-footer">
+            <h3>Large Language Models in Production: Lessons Learned</h3>
+            <p>Deploying a Gemini QnA bot: prompt engineering, cost optimization, and scaling.</p>
             <a href="blog/llm-production.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-            <div class="blog-tags">
-              <span class="tag">LLM</span>
-              <span class="tag">Gemini</span>
-              <span class="tag">GCP</span>
+          </div>
+        </article>
+        <article class="blog-card">
+          <div class="blog-thumb"><img src="./assets/img/blog/redshift.png" alt="Redshift" loading="lazy" /></div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat">Cloud &amp; DevOps</span>
+              <span class="read-time"><i class="fas fa-clock"></i> 6 min</span>
+              <span class="date">Dec 01, 2025</span>
             </div>
+            <h3>Optimizing Data Warehouse Performance on AWS Redshift</h3>
+            <p>Distribution keys, sort keys, and query patterns that improved performance by 10x.</p>
+            <a href="blog/redshift-optimization.html" class="read-more">Read More <i
+                class="fas fa-arrow-right"></i></a>
           </div>
-        </div>
-      </article>
-
-      <!--? Blog Post 3 -->
-      <article class="blog-post">
-        <div class="blog-image">
-          <img src="./assets/img/blog/redshift.png" alt="Cloud Architecture" loading="lazy" decoding="async" />
-          <div class="blog-date">
-            <span class="day">01</span>
-            <span class="month">Dec 2025</span>
+        </article>
+        <article class="blog-card">
+          <div class="blog-thumb"><img src="./assets/img/blog/kafka_spark.png" alt="Kafka Spark" loading="lazy" />
           </div>
-        </div>
-        <div class="blog-content">
-          <div class="blog-meta">
-            <span class="category"><i class="fas fa-tag"></i> Cloud & DevOps</span>
-            <span class="read-time"><i class="fas fa-clock"></i> 6 min read</span>
-          </div>
-          <h3 class="blog-title">Optimizing Data Warehouse Performance on AWS Redshift</h3>
-          <p class="blog-excerpt">
-            A deep dive into performance tuning techniques for Amazon Redshift. Covering distribution keys,
-            sort keys, compression strategies, and query optimization patterns that improved our query performance by
-            10x.
-          </p>
-          <div class="blog-footer">
-            <a href="blog/redshift-optimization.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-            <div class="blog-tags">
-              <span class="tag">AWS</span>
-              <span class="tag">Redshift</span>
-              <span class="tag">SQL</span>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat">Software Engineering</span>
+              <span class="read-time"><i class="fas fa-clock"></i> 7 min</span>
+              <span class="date">Nov 24, 2025</span>
             </div>
+            <h3>Real-time Data Processing with Kafka and Spark Streaming</h3>
+            <p>Exactly-once semantics, backpressure handling, and low latency at scale.</p>
+            <a href="blog/kafka-spark-streaming.html" class="read-more">Read More <i
+                class="fas fa-arrow-right"></i></a>
           </div>
-        </div>
-      </article>
-
-      <!--? Blog Post 4 -->
-      <article class="blog-post">
-        <div class="blog-image">
-          <img src="./assets/img/blog/kafka_spark.png" alt="Software Engineering" loading="lazy" decoding="async" />
-          <div class="blog-date">
-            <span class="day">24</span>
-            <span class="month">Nov 2025</span>
-          </div>
-        </div>
-        <div class="blog-content">
-          <div class="blog-meta">
-            <span class="category"><i class="fas fa-tag"></i> Software Engineering</span>
-            <span class="read-time"><i class="fas fa-clock"></i> 7 min read</span>
-          </div>
-          <h3 class="blog-title">Real-time Data Processing with Apache Kafka and Spark Streaming</h3>
-          <p class="blog-excerpt">
-            Building a real-time analytics platform using Kafka for message streaming and Spark for processing.
-            Learn about exactly-once semantics, backpressure handling, and maintaining low latency at scale.
-          </p>
-          <div class="blog-footer">
-            <a href="blog/kafka-spark-streaming.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-            <div class="blog-tags">
-              <span class="tag">Kafka</span>
-              <span class="tag">Spark</span>
-              <span class="tag">Streaming</span>
-            </div>
-          </div>
-        </div>
-      </article>
-
+        </article>
+      </div>
     </div>
   </section>
   <!--?======================== Blog end ========================= -->
 
-  <!--?======================== Footer start ========================= -->
-  <section class="contact" id="contact">
-    <h2 class="heading"><i class="fas fa-address-card"></i> Contact </h2>
-    <footer class="footer">
-      <div class="box-container">
-        <div class="box">
-          <p>Thank you for visiting my personal portfolio website. Connect with me over socials. <br /></p>
+  <!--?======================== Contact start ========================= -->
+  <section id="contact" class="alt">
+    <div class="sec-inner" style="padding-bottom: 60px;">
+      <div class="sec-head" style="text-align: center;">
+        <p class="eyebrow">Let's connect</p>
+        <h2 class="sec-title" style="margin-bottom: 14px;">Contact</h2>
+        <p style="font-size: 1rem; color: #8898b8; max-width: 440px; margin: 0 auto;">Open to new opportunities,
+          collaborations, or just a chat.</p>
+      </div>
+      <div id="contact-inner">
+        <div class="contact-col">
+          <div class="contact-row">
+            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+            <div><p class="label">Phone</p><p class="value">+84 981-144-249</p></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div><p class="label">Email</p><a class="value" href="mailto:namnguyen892000@gmail.com">namnguyen892000@gmail.com</a></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div><p class="label">Location</p><p class="value">Hanoi, Vietnam</p></div>
+          </div>
         </div>
-
-        <div class="box right">
-          <h3>contact info</h3>
-          <p><i class="fas fa-phone"></i>+84 981-144-249</p>
-          <p><i class="fas fa-envelope"></i>namnguyen892000@gmail.com</p>
-          <p><i class="fas fa-map-marked-alt"></i>Hanoi, Vietnam</p>
-          <div class="share">
-            <a href="https://www.linkedin.com/in/namhn89/" class="fab fa-linkedin" aria-label="linkedin"
-              target="_blank"></a>
-            <a href="https://github.com/namhn89" class="fab fa-github" aria-label="GitHub" target="_blank"></a>
-            <a href="https://join.skype.com/invite/WliTki5BC9ek" class="fab fa-skype" aria-label="Skype"
-              target="_blank"></a>
-            <a href="mailto:namnguyen892000@gmail.com" class="fas fa-envelope" aria-label="Mail" target="_blank"></a>
+        <div class="contact-links">
+          <p class="label">Find me on</p>
+          <div class="social-list">
+            <a href="https://www.linkedin.com/in/namhn89/" target="_blank" class="linkedin"><i
+                class="fab fa-linkedin-in"></i> LinkedIn</a>
+            <a href="https://github.com/namhn89" target="_blank" class="github"><i class="fab fa-github"></i>
+              GitHub</a>
+            <a href="https://join.skype.com/invite/WliTki5BC9ek" target="_blank" class="skype"><i
+                class="fab fa-skype"></i> Skype</a>
           </div>
         </div>
       </div>
-    </footer>
+    </div>
+    <div class="footer-bar">
+      <p>© 2026 Nam Nguyen · Hanoi, Vietnam</p>
+    </div>
   </section>
-  <!--?======================== Footer end ========================= -->
+  <!--?======================== Contact end ========================= -->
 
-  <!--?======================== Scroll Up ========================= -->
-  <a href="#home" aria-label="ScrollTop" class="fas fa-arrow-up" id="scroll-top"></a>
-  <!-- <a class="fas fa-volume-off" id="play-music"></a> -->
-  <!--?======================== Scroll Up ========================= -->
+  <!-- Scroll-to-top -->
+  <a href="#home" aria-label="Back to top" id="scroll-top"><i class="fas fa-arrow-up"></i></a>
 
-  <!--? jQuery CDN -->
-  <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
+  <!--? jQuery not required anymore -->
   <!--? particle.js -->
   <script defer src="./assets/js/particles.min.js"></script>
   <script defer src="./assets/js/app.js"></script>
-
-  <!--? Tilt-Vannila.js -->
-  <script defer src="./assets/js/vanilla-tilt.min.js"></script>
 
   <!--? Main JavaScript -->
   <script defer src="./assets/js/script.js"></script>
