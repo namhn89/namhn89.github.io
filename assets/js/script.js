@@ -16,12 +16,32 @@ navLinksList.querySelectorAll("a").forEach((link) => {
 // Audio toggle
 const audio = document.getElementById("bg-audio");
 const audioBtn = document.getElementById("audio-btn");
-audioBtn.addEventListener("click", function () {
-  audio.muted = !audio.muted;
-  if (!audio.muted) audio.play().catch(() => {});
+
+function setAudioIcon() {
   audioBtn.querySelector("i").className = audio.muted
     ? "fas fa-volume-mute"
     : "fas fa-volume-up";
+}
+
+function tryUnmute() {
+  audio.muted = false;
+  audio.play().catch(() => {});
+  setAudioIcon();
+}
+
+// Try to autoplay with sound right away; browsers that block it will
+// keep it muted until the first user interaction unmutes it below.
+tryUnmute();
+if (audio.muted) {
+  ["click", "touchstart", "keydown"].forEach((evt) =>
+    document.addEventListener(evt, tryUnmute, { once: true })
+  );
+}
+
+audioBtn.addEventListener("click", function () {
+  audio.muted = !audio.muted;
+  if (!audio.muted) audio.play().catch(() => {});
+  setAudioIcon();
 });
 
 // Nav active highlight (scroll spy)

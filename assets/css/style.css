@@ -86,7 +86,7 @@ img {
     grid-template-columns: 1fr 1fr !important;
   }
   .tl-wrap::before {
-    left: 28px !important;
+    left: 24px !important;
   }
   .sec-inner {
     padding: 80px 32px !important;
@@ -442,6 +442,8 @@ section.base {
 }
 .about-photo-frame {
   position: relative;
+  width: max-content;
+  margin: 0 auto;
 }
 .about-photo-frame .pic {
   width: 220px;
@@ -659,7 +661,7 @@ section.base {
 
 @media (max-width: 1024px) {
   .tl-wrap::before {
-    left: 28px;
+    left: 24px;
   }
   .tl-item {
     grid-template-columns: 48px 1fr !important;
