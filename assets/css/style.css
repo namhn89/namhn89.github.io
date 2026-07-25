@@ -912,6 +912,13 @@ section.base {
   font-size: 1.6rem;
   color: rgba(226, 232, 244, 0.35);
 }
+.gal-thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .gal-thumb::after {
   content: "";
   position: absolute;
