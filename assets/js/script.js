@@ -3,6 +3,26 @@ document.addEventListener("visibilitychange", function () {
   document.title = "Portfolio | Nam Nguyen";
 });
 
+// Theme toggle (dark/light)
+const themeToggleBtn = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
+const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+const THEME_COLORS = { dark: "#06080f", light: "#f5f7fb" };
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  themeIcon.className = theme === "light" ? "fas fa-sun" : "fas fa-moon";
+  if (themeColorMeta) themeColorMeta.content = THEME_COLORS[theme];
+}
+
+applyTheme(document.documentElement.getAttribute("data-theme") || "dark");
+
+themeToggleBtn.addEventListener("click", function () {
+  const next = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+  localStorage.setItem("portfolio-theme", next);
+  applyTheme(next);
+});
+
 // Mobile menu toggle
 const menuBtn = document.getElementById("menu-btn");
 const navLinksList = document.getElementById("nav-links");
