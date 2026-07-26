@@ -115,6 +115,35 @@ window.addEventListener("scroll", function () {
   scrollTopBtn.classList.toggle("active", window.scrollY > 400);
 });
 
+// Reveal content on scroll
+const revealGroups = [
+  "#about-photo, .about-body",
+  ".tl-item",
+  "#projects-grid > *",
+  "#gallery-grid > *",
+  "#blog-grid > *",
+  ".contact-col, .contact-links",
+];
+revealGroups.forEach((selector) => {
+  document.querySelectorAll(selector).forEach((el, i) => {
+    el.classList.add("reveal");
+    el.style.transitionDelay = `${Math.min(i, 6) * 90}ms`;
+  });
+});
+document.querySelectorAll(".sec-head").forEach((el) => el.classList.add("reveal"));
+
+const revealObserver = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("in-view");
+      observer.unobserve(entry.target);
+    });
+  },
+  { threshold: 0.15, rootMargin: "0px 0px -60px 0px" }
+);
+document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
 // Preloader
 window.addEventListener("load", function () {
   const preloader = document.getElementById("preloader");
